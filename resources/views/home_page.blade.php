@@ -157,7 +157,7 @@
                             <div class="card-body d-flex flex-column">
                                 <h5 class="card-title flex-fill">Teacher</h5>
                                 <p class="card-text flex-fill">Manage your school's teaching staff efficiently.</p>
-                                <a href="#" class="btn btn-sm btn-warning align-self-end">Manage <i
+                                <a href="manage_teacher_page" class="btn btn-sm btn-warning align-self-end">Manage <i
                                         class="fa fa-angle-double-right"></i></a>
                             </div>
                         </div>

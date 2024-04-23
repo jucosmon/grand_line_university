@@ -13,7 +13,7 @@
         <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
             <ul class="navbar-nav" style="font-family: 'Montserrat', sans-serif; font-weight: 600">
                 <li class="nav-item">
-                    <a class="nav-link text-light" href="#">Teacher</a>
+                    <a class="nav-link text-light" href="manage_teacher_page">Teacher</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-light" href="manage_student_page">Student</a>
