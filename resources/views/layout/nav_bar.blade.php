@@ -19,7 +19,7 @@
                     <a class="nav-link text-light" href="manage_student_page">Student</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-light" href="#">Subject</a>
+                    <a class="nav-link text-light" href="manage_subject_page">Subject</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-light" href="#">Room</a>

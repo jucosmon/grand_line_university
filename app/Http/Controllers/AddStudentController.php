@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Student; // Correct import for the Student model
+use App\Models\Student;
 use Illuminate\Http\Request;
 
 class AddStudentController extends Controller
