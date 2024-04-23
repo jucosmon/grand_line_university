@@ -1,0 +1,48 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+
+}
+
+.overlay-text {
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    z-index: 1;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.overlay-text h1 {
+    font-size: 3rem;
+}
+
+.overlay-text p {
+    font-size: 1.5rem;
+}
+
+
+/* Setting the height of the big picture */
+.custom-height {
+    height: 60vh;
+    object-fit: cover;
+    margin-bottom: 2%;
+}
+
+.nav-covered-area {
+    margin-top: 5%;
+}
+
+.centered-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 20px;
+}
+
+.custom-form {
+    width: 60%;
+}
