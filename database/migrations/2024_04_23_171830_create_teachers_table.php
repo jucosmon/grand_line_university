@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('degree');
             $table->date('birthday')->nullable();
             $table->char('sex');
+            $table->string('password');
             $table->timestamps();
         });
     }

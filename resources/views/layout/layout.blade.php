@@ -20,13 +20,7 @@
     <link rel="stylesheet" href="assets/css/owl.css">
     <link rel="stylesheet" href="assets/css/lightbox.css">
     <link rel="stylesheet" href="assets/css/main.css">
-    <!--
 
-TemplateMo 557 Grad School
-
-https://templatemo.com/tm-557-grad-school
-
--->
 </head>
 
 <body>

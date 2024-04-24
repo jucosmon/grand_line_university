@@ -14,7 +14,6 @@ class AddTeacherController extends Controller
         'first_name' => request()->get('first_name',''),
         'last_name' => request()->get('last_name',''),
         'middle_initial' => request()->get('middle_initial',''),
-        'email' => request()->get('email',''),
         'degree' => request()->get('degree',''),
         'birthday' => request()->get('birthday',''),
         'sex' => request()->get('sex','')

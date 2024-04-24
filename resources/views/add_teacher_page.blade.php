@@ -31,13 +31,7 @@
                                 Please enter the teacher's last name.
                             </div>
                         </div>
-                        <div class="mb-3">
-                            <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="email" name="email" required>
-                            <div class="invalid-feedback">
-                                Please enter a valid email address.
-                            </div>
-                        </div>
+
                         <div class="mb-3">
                             <label for="degree" class="form-label">Degree</label>
                             <select class="form-select" id="degree" name="degree" required>
@@ -76,7 +70,7 @@
                                 Please select the teacher's sex.
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-primary">Add</button>
                     </form>
                 </div>
             </div>
