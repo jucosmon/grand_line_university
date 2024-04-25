@@ -8,7 +8,7 @@ class TeachersController extends Controller
 {
     public function index(){
         return view(
-            'manage_teacher_page',
+            'pages.teacher.manage',
             [
                 'teachers' => Teacher::all()
             ]
@@ -16,12 +16,12 @@ class TeachersController extends Controller
     }
 
     public function addForm(){
-        return view('add_teacher_page');
+        return view('pages.teacher.add');
     }
 
     public function store()
     {
-    $student =  Teacher::create ([
+    $teacher =  Teacher::create ([
 
         'id' => request()->get('id',''),
         'first_name' => request()->get('first_name',''),
@@ -31,6 +31,6 @@ class TeachersController extends Controller
         'birthday' => request()->get('birthday',''),
         'sex' => request()->get('sex','')
     ]);
-    return redirect()->route('manage_teacher_page');
+    return redirect()->route('teacher.manage');
     }
 }

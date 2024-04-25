@@ -157,8 +157,8 @@
                             <div class="card-body d-flex flex-column">
                                 <h5 class="card-title flex-fill">Teacher</h5>
                                 <p class="card-text flex-fill">Manage your school's teaching staff efficiently.</p>
-                                <a href="manage_teacher_page" class="btn btn-sm btn-warning align-self-end">Manage <i
-                                        class="fa fa-angle-double-right"></i></a>
+                                <a href="{{ route('teacher.manage') }}" class="btn btn-sm btn-warning align-self-end">Manage
+                                    <i class="fa fa-angle-double-right"></i></a>
                             </div>
                         </div>
                     </div>
@@ -168,8 +168,8 @@
                             <div class="card-body d-flex flex-column">
                                 <h5 class="card-title flex-fill">Student</h5>
                                 <p class="card-text flex-fill">Organize student information effectively.</p>
-                                <a href="manage_student_page" class="btn btn-sm btn-warning align-self-end">Manage <i
-                                        class="fa fa-angle-double-right"></i></a>
+                                <a href="{{ route('student.manage') }}" class="btn btn-sm btn-warning align-self-end">Manage
+                                    <i class="fa fa-angle-double-right"></i></a>
                             </div>
                         </div>
                     </div>
@@ -179,7 +179,8 @@
                             <div class="card-body d-flex flex-column">
                                 <h5 class="card-title flex-fill">Subject</h5>
                                 <p class="card-text flex-fill">Plan and manage subject information seamlessly.</p>
-                                <a href="manage_subject_page" class="btn btn-sm btn-warning align-self-end">Manage <i
+                                <a href="{{ route('subject.manage') }}"
+                                    class="btn btn-sm btn-warning align-self-end">Manage <i
                                         class="fa fa-angle-double-right"></i></a>
                             </div>
                         </div>

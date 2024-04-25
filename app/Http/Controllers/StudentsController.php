@@ -14,7 +14,7 @@ class StudentsController extends Controller
     public function index(){
 
         return view(
-            'manage_student_page',
+            'pages.student.manage',
             [
                 'students' => Student::all()
             ]
@@ -24,7 +24,7 @@ class StudentsController extends Controller
 
     public function addForm(){
 
-        return view('add_student_page');
+        return view('pages.student.add');
     }
 
     public function store()
@@ -40,6 +40,6 @@ class StudentsController extends Controller
         'birthday' => request()->get('birthday',''),
         'sex' => request()->get('sex','')
     ]);
-    return redirect()->route('manage_student_page');
+    return redirect()->route('student.manage');
     }
 }

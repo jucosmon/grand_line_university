@@ -53,7 +53,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="prerequisites" class="form-label">Pre-requisite</label>
-                            <input type="text" class="form-control" id="prerequisites" name="prerequisites" required>
+                            <input type="text" class="form-control" id="prerequisites" name="prerequisites">
                             <div class="invalid-feedback">
                                 Please enter the pre-requisite course of this subject if applicable.
                             </div>

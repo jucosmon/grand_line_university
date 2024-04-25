@@ -10,7 +10,7 @@ class SubjectsController extends Controller
     //
     public function index(){
         return view(
-            'manage_subject_page',
+            'pages.subject.manage',
             [
                 'subjects' => Subject::all()
             ]
@@ -18,7 +18,7 @@ class SubjectsController extends Controller
     }
 
     public function addForm(){
-        return view('add_subject_page');
+        return view('pages.subject.add');
     }
 
     public function store()
@@ -33,6 +33,6 @@ class SubjectsController extends Controller
         'status' => request()->get('status',''),
 
     ]);
-    return redirect()->route('manage_subject_page');
+    return redirect()->route('subject.manage');
     }
 }
