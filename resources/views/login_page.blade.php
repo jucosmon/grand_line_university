@@ -178,7 +178,7 @@
                     <div class="section-heading">
                         <h2>Login</h2>
                     </div>
-                    <form action="#" method="post" class="custom-form">
+                    <form action="{{ route('login') }}" method="post" class="custom-form">
                         @csrf
                         <div class="mb-3">
                             <label for="user_type" class="form-label">User Type</label>

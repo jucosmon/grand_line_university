@@ -1,11 +1,10 @@
 <?php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Student extends Model
+class Student extends Authenticatable
 {
     use HasFactory;
 
@@ -21,25 +20,24 @@ class Student extends Model
         'password'
     ];
 
-    // Define mutator to automatically hash password when setting it
-    public function setPasswordAttribute($value)
-    {
-        $this->attributes['password'] = bcrypt($value);
-    }
-
-    // Override the boot method to add an event listener
+    // Override the boot method to add event listeners
     protected static function boot()
     {
         parent::boot();
 
-        // Listen for the creating event to set the default password and email
+        // Listen for the creating event to set the default email
         static::creating(function ($student) {
             $lastNameLowercase = strtolower($student->last_name);
-            $firstNameLowercase = strtolower($student->first_name); // Convert first name to lowercase
-            $firstName = str_replace(' ', '_', $firstNameLowercase); // Replace spaces with underscores
+            $firstNameLowercase = strtolower($student->first_name);
+            $firstName = str_replace(' ', '_', $firstNameLowercase);
             $email = $lastNameLowercase . '.' . $firstName . '@glu.edu.ph';
             $student->email = $email;
-            $student->password = bcrypt($lastNameLowercase . $student->id);
+        });
+
+        // Listen for the created event to set the default password
+        static::created(function ($student) {
+            $student->password = $student->last_name . $student->id; // Set password as lastname + id
+            $student->save(); // Save the model to update the password field
         });
     }
 }
