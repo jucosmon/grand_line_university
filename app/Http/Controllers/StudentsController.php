@@ -21,6 +21,7 @@ class StudentsController extends Controller
         );
     }
 
+    // adding a student
 
     public function addForm(){
 
@@ -40,6 +41,56 @@ class StudentsController extends Controller
         'birthday' => request()->get('birthday',''),
         'sex' => request()->get('sex','')
     ]);
-    return redirect()->route('student.manage');
+        return redirect()->route('student.manage');
     }
+
+    //updating a student
+    public function editForm($id){
+
+        $student = Student::findOrFail($id);
+        return view('pages.student.edit', compact('student'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        // Find the student by ID
+        $student = Student::findOrFail($id);
+
+        // Update the student's attributes based on the request data
+        $student->update([
+            'first_name' => $request->input('first_name'),
+            'last_name' => $request->input('last_name'),
+            'middle_initial' => $request->input('middle_initial'),
+            'program' => $request->input('program'),
+            'year' => $request->input('year'),
+            'birthday' => $request->input('birthday'),
+            'sex' => $request->input('sex'),
+        ]);
+
+        // Update the email based on the updated first name and last name
+        $lastNameLowercase = strtolower($student->last_name);
+        $firstNameLowercase = strtolower($student->first_name);
+        $firstName = str_replace(' ', '_', $firstNameLowercase);
+        $email = $lastNameLowercase . '.' . $firstName . '@glu.edu.ph';
+        $student->email = $email;
+        $student->save();
+
+        // Redirect back with a success message
+        return redirect()->route('student.manage')->with('success', 'Student updated successfully.');
+    }
+
+    //delete the student in database
+    public function destroy($id)
+    {
+        // Find the student by ID
+        $student = Student::findOrFail($id);
+
+        // Delete the student
+        $student->delete();
+
+        // Redirect back with a success message
+        return redirect()->route('student.manage')->with('success', 'Student deleted successfully.');
+    }
+
+
 }
