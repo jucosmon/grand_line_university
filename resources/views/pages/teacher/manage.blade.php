@@ -15,10 +15,12 @@
                                 <th>Birthday</th>
                                 <th>Sex</th>
                                 <th>Email</th>
+                                <th>Update</th>
+                                <th>Delete</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {{-- Display up to 10 students --}}
+                            {{-- Display up to 10 teachers --}}
                             @foreach ($teachers as $teacher)
                                 <tr>
                                     <td>{{ $teacher['id'] }}</td>
@@ -28,12 +30,30 @@
                                     <td>{{ $teacher['birthday'] }}</td>
                                     <td>{{ $teacher['sex'] }}</td>
                                     <td>{{ $teacher['email'] }}</td>
+                                    <td>
+                                        <a href="{{ route('teacher.edit_page', $teacher['id']) }}" class="btn btn-warning">
+                                            <i class="bi bi-pencil-square"></i>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <form action="{{ route('teacher.delete', $teacher['id']) }}" method="POST"
+                                            class="d-inline">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger"
+                                                onclick="return confirm('Are you sure you want to delete this teacher?');">
+                                                <i class="bi bi-trash"></i>
+                                            </button>
+                                        </form>
+                                    </td>
                                 </tr>
                             @endforeach
 
                             {{-- Add empty rows to fill up to 10 --}}
                             @for ($i = count($teachers); $i < 10; $i++)
                                 <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
                                     <td>&nbsp;</td>
                                     <td>&nbsp;</td>
                                     <td>&nbsp;</td>

@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Student; // Correct import for the Student model
+use App\Models\Student;
 use Illuminate\Http\Request;
 
 class StudentsController extends Controller
@@ -21,8 +21,8 @@ class StudentsController extends Controller
         );
     }
 
-    // adding a student
 
+    //ADDING NEW STUDENT
     public function addForm(){
 
         return view('pages.student.add');
@@ -44,7 +44,7 @@ class StudentsController extends Controller
         return redirect()->route('student.manage');
     }
 
-    //updating a student
+    //UPDATING A STUDENT'S INFO
     public function editForm($id){
 
         $student = Student::findOrFail($id);
@@ -53,10 +53,8 @@ class StudentsController extends Controller
 
     public function update(Request $request, $id)
     {
-        // Find the student by ID
         $student = Student::findOrFail($id);
 
-        // Update the student's attributes based on the request data
         $student->update([
             'first_name' => $request->input('first_name'),
             'last_name' => $request->input('last_name'),
@@ -75,20 +73,16 @@ class StudentsController extends Controller
         $student->email = $email;
         $student->save();
 
-        // Redirect back with a success message
         return redirect()->route('student.manage')->with('success', 'Student updated successfully.');
     }
 
-    //delete the student in database
+    //DELETING A STUDENT IN THE DATABASE
     public function destroy($id)
     {
-        // Find the student by ID
         $student = Student::findOrFail($id);
 
-        // Delete the student
         $student->delete();
 
-        // Redirect back with a success message
         return redirect()->route('student.manage')->with('success', 'Student deleted successfully.');
     }
 

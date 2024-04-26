@@ -35,6 +35,9 @@ Route::prefix('/teachers')->group(function () {
     Route::get('/manage', [TeachersController::class, 'index'])->name('teacher.manage');
     Route::get('/create', [TeachersController::class, 'store'])->name('teacher.create');
     Route::get('/add_form', [TeachersController::class, 'addForm'])->name('teacher.add_page');
+    Route::get('/{id}/edit_form', [TeachersController::class, 'editForm'])->name('teacher.edit_page');
+    Route::put('/{id}/update', [TeachersController::class, 'update'])->name('teacher.update');
+    Route::delete('/{id}/delete', [TeachersController::class, 'destroy'])->name('teacher.delete');
 });
 
 
