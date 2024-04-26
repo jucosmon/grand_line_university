@@ -46,6 +46,9 @@ Route::prefix('/subjects')->group(function () {
     Route::get('/manage', [SubjectsController::class, 'index'])->name('subject.manage');
     Route::get('/create', [SubjectsController::class, 'store'])->name('subject.create');
     Route::get('/add_form', [SubjectsController::class, 'addForm'])->name('subject.add_page');
+    Route::get('/{id}/edit_form', [SubjectsController::class, 'editForm'])->name('subject.edit_page');
+    Route::put('/{id}/update', [SubjectsController::class, 'update'])->name('subject.update');
+    Route::delete('/{id}/delete', [SubjectsController::class, 'destroy'])->name('subject.delete');
 });
 /* Redirect unauthenticated users to login page
 Route::get('/home', function () {

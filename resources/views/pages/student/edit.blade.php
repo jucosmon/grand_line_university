@@ -64,7 +64,7 @@
                         <div class="mb-3">
                             <label for="year" class="form-label">Year</label>
                             <input type="number" class="form-control" id="year" name="year"
-                                value="{{ $student->year }}">
+                                value="{{ $student->year }}" required>
                             <div class="invalid-feedback">
                                 Please enter the student's year.
                             </div>
@@ -72,14 +72,14 @@
                         <div class="mb-3">
                             <label for="birthday" class="form-label">Birthday</label>
                             <input type="date" class="form-control" id="birthday" name="birthday"
-                                value="{{ $student->birthday }}">
+                                value="{{ $student->birthday }}" required>
                             <div class="invalid-feedback">
                                 Please enter the student's birthday.
                             </div>
                         </div>
                         <div class="mb-3">
                             <label for="sex" class="form-label">Sex</label>
-                            <select class="form-select" id="sex" name="sex">
+                            <select class="form-select" id="sex" name="sex" required>
                                 <option value="">Select Sex</option>
                                 <option value="F" {{ $student->sex == 'F' ? 'selected' : '' }}>Female</option>
                                 <option value="M" {{ $student->sex == 'M' ? 'selected' : '' }}>Male</option>

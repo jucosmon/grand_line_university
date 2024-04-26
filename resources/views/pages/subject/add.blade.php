@@ -26,7 +26,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="description" class="form-label">Description</label>
-                            <input type="text" class="form-control" id="description" name="description" required>
+                            <textarea class="form-control" id="description" name="description" rows="3"></textarea>
                             <div class="invalid-feedback">
                                 Please enter the description of the subject.
                             </div>

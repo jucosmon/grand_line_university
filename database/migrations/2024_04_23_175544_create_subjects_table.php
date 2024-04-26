@@ -12,7 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('subjects', function (Blueprint $table) {
-            $table->string('code')->primary(); // Subject Code as primary key
+            $table->id(); // Auto-incrementing ID
+            $table->string('code')->unique(); // Subject Code
             $table->string('name');
             $table->text('description')->nullable();
             $table->integer('credits');
