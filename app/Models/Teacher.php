@@ -13,11 +13,19 @@ class Teacher extends Model
         'last_name',
         'middle_initial',
         'email',
-        'degree',
+        'password',
         'birthday',
         'sex',
-        'password'
+        'degree',
+        'is_active',
+        'department_id'
+
+
     ];
+    public function department()
+    {
+        return $this->belongsTo(Department::class);
+    }
 
 
     protected static function boot()

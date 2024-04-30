@@ -1,69 +1,69 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Student;
+use App\Models\Program;
 use Illuminate\Http\Request;
 
 class StudentsController extends Controller
 {
-    //
-    public function showHomePage(){
-
+    public function showHomePage()
+    {
         return view('student.home_page');
     }
-    public function index(){
 
-        return view(
-            'pages.student.manage',
-            [
-                'students' => Student::all()
-            ]
-        );
-    }
-
-
-    //ADDING NEW STUDENT
-    public function addForm(){
-
-        return view('pages.student.add');
-    }
-
-    public function store()
+    public function index()
     {
-    $student =  Student::create ([
+        $students = Student::all();
+        return view('pages.student.manage', compact('students'));
+    }
 
-        'id' => request()->get('id',''),
-        'first_name' => request()->get('first_name',''),
-        'last_name' => request()->get('last_name',''),
-        'middle_initial' => request()->get('middle_initial',''),
-        'program' => request()->get('program',''),
-        'year' => request()->get('year',''),
-        'birthday' => request()->get('birthday',''),
-        'sex' => request()->get('sex','')
-    ]);
+    public function addForm()
+    {
+        $programs = Program::all();
+        return view('pages.student.add', compact('programs'));
+    }
+
+    public function store(Request $request)
+    {
+        $validatedData = $request->validate([
+            'first_name' => 'required|string',
+            'last_name' => 'required|string',
+            'middle_initial' => 'nullable|string',
+            'year_level' => 'required|integer',
+            'birthday' => 'required|date',
+            'sex' => 'required|string|in:F,M,O',
+            'program_id' => 'required|exists:programs,id',
+        ]);
+
+        $student = Student::create($validatedData);
         return redirect()->route('student.manage');
     }
 
-    //UPDATING A STUDENT'S INFO
-    public function editForm($id){
-
+    public function editForm($id)
+    {
         $student = Student::findOrFail($id);
-        return view('pages.student.edit', compact('student'));
+        $programs = Program::all();
+        return view('pages.student.edit', compact('student', 'programs'));
     }
 
     public function update(Request $request, $id)
     {
         $student = Student::findOrFail($id);
 
-        $student->update([
-            'first_name' => $request->input('first_name'),
-            'last_name' => $request->input('last_name'),
-            'middle_initial' => $request->input('middle_initial'),
-            'program' => $request->input('program'),
-            'year' => $request->input('year'),
-            'birthday' => $request->input('birthday'),
-            'sex' => $request->input('sex'),
+        $validatedData = $request->validate([
+            'first_name' => 'required|string',
+            'last_name' => 'required|string',
+            'middle_initial' => 'nullable|string',
+            'year_level' => 'required|integer',
+            'birthday' => 'required|date',
+            'sex' => 'required|string|in:F,M,O',
+            'program_id' => 'required|exists:programs,id',
+            'is_active' => 'required|integer|in:0,1',
         ]);
+
+        $student->update($validatedData);
 
         // Update the email based on the updated first name and last name
         $lastNameLowercase = strtolower($student->last_name);
@@ -76,15 +76,10 @@ class StudentsController extends Controller
         return redirect()->route('student.manage')->with('success', 'Student updated successfully.');
     }
 
-    //DELETING A STUDENT IN THE DATABASE
     public function destroy($id)
     {
         $student = Student::findOrFail($id);
-
         $student->delete();
-
         return redirect()->route('student.manage')->with('success', 'Student deleted successfully.');
     }
-
-
 }

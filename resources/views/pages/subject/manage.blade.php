@@ -27,7 +27,7 @@
                                     <td>{{ $subject['name'] }}</td>
                                     <td>{{ $subject['description'] }}</td>
                                     <td>{{ $subject['credits'] }}</td>
-                                    <td>{{ $subject['status'] }}</td>
+                                    <td>{{ $subject['is_active'] ? 'Active' : 'Inactive' }}</td>
                                     <td>{{ $subject['prerequisites'] }}</td>
                                     <td>
                                         <a href="{{ route('subject.edit_page', $subject->id) }}" class="btn btn-warning">

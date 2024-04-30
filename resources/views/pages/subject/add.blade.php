@@ -31,18 +31,6 @@
                                 Please enter the description of the subject.
                             </div>
                         </div>
-                        <div class="mb-3">
-                            <label for="status" class="form-label">Status</label>
-                            <select class="form-select" id="status" name="status" required>
-                                <option value="">Status of the subject</option>
-                                <option value="Active">Active</option>
-                                <option value="Inactive">Inactive</option>
-                                <option value="Upcoming">Upcoming</option>
-                            </select>
-                            <div class="invalid-feedback">
-                                Please select the status of the subject.
-                            </div>
-                        </div>
 
                         <div class="mb-3">
                             <label for="credits" class="form-label">Credits</label>

@@ -46,24 +46,22 @@
                                 value="{{ $subject->prerequisites }}">
                         </div>
                         <div class="mb-3">
-                            <label for="status" class="form-label">Status</label>
-                            <select class="form-select" id="status" name="status" required>
+                            <label for="is_active" class="form-label">Status</label>
+                            <select class="form-select" id="is_active" name="is_active" required>
                                 <option value="">Select Status</option>
-                                <option value="Active" {{ $subject->status == 'Active' ? 'selected' : '' }}>Active
-                                </option>
-                                <option value="Inactive" {{ $subject->status == 'Inactive' ? 'selected' : '' }}>Inactive
-                                </option>
-                                <option value="Upcoming" {{ $subject->status == 'Upcoming' ? 'selected' : '' }}>Upcoming
-                                </option>
+                                <option value="1" {{ $subject->is_active == 1 ? 'selected' : '' }}>Active</option>
+                                <option value="0" {{ $subject->is_active == 0 ? 'selected' : '' }}>Inactive</option>
                             </select>
                             <div class="invalid-feedback">
                                 Please select the status of the subject.
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary">Update</button>
-                    </form>
+
                 </div>
+                <button type="submit" class="btn btn-primary">Update</button>
+                </form>
             </div>
+        </div>
         </div>
     </section>
 @endsection

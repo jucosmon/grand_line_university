@@ -13,13 +13,18 @@ class Student extends Authenticatable
         'last_name',
         'middle_initial',
         'email',
-        'program',
-        'year',
+        'password',
+        'year_level',
         'birthday',
         'sex',
-        'password'
-    ];
+        'is_active',
+        'program_id'
 
+    ];
+    public function program()
+    {
+        return $this->belongsTo(Program::class);
+    }
     // Override the boot method to add event listeners
     protected static function boot()
     {

@@ -15,6 +15,7 @@
                                 <th>Birthday</th>
                                 <th>Sex</th>
                                 <th>Email</th>
+                                <th>Enrolled</th>
                                 <th>Update</th>
                                 <th>Delete</th>
                             </tr>
@@ -26,10 +27,11 @@
                                     <td>{{ $student->id }}</td>
                                     <td>{{ $student->first_name }} {{ $student->middle_initial }} {{ $student->last_name }}
                                     </td>
-                                    <td>{{ $student->program }} {{ $student->year }}</td>
+                                    <td>{{ $student->program->name }} {{ $student->year }}</td>
                                     <td>{{ $student->birthday }}</td>
                                     <td>{{ $student->sex }}</td>
                                     <td>{{ $student->email }}</td>
+                                    <td>{{ $student->is_active ? 'Yes' : 'No' }}</td>
                                     <td>
                                         <a href="{{ route('student.edit_page', $student->id) }}" class="btn btn-warning">
                                             <i class="bi bi-pencil-square"></i>
@@ -56,6 +58,7 @@
                             {{-- Add empty rows to fill up to 10 --}}
                             @for ($i = count($students); $i < 10; $i++)
                                 <tr>
+                                    <td>&nbsp;</td>
                                     <td>&nbsp;</td>
                                     <td>&nbsp;</td>
                                     <td>&nbsp;</td>

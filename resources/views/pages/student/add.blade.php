@@ -33,23 +33,18 @@
                         </div>
 
                         <div class="mb-3">
-                            <label for="program" class="form-label">Program</label>
-                            <select class="form-select" id="program" name="program" required>
+                            <label for="program_id" class="form-label">Program</label>
+                            <select class="form-select" id="program_id" name="program_id" required>
                                 <option value="">Select Program</option>
-                                <option value="Bachelor in Fine Arts">Bachelor in Fine Arts</option>
-                                <option value="Bachelor of Science in Information Technology">Bachelor of Science in
-                                    Information Technology (BSIT)</option>
-                                <option value="Bachelor of Science in Computer Science">Bachelor of Science in
-                                    Computer Science (BSCS)</option>
-                                <option value="Bachelor of Science in Medical Technology">Bachelor of Science in
-                                    Medical Technology (BSMT)</option>
-                                <option value="Bachelor of Science in Nursing">Bachelor of Science in Nursing (BSN)
-                                </option>
+                                @foreach ($programs as $program)
+                                    <option value="{{ $program->id }}">{{ $program->name }}</option>
+                                @endforeach
                             </select>
                             <div class="invalid-feedback">
                                 Please select a program.
                             </div>
                         </div>
+
                         <div class="mb-3">
                             <label for="year" class="form-label">Year</label>
                             <input type="number" class="form-control" id="year" name="year" required>

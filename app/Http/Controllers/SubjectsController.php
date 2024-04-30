@@ -31,7 +31,6 @@ class SubjectsController extends Controller
         'description' => request()->get('description',''),
         'credits' => request()->get('credits',''),
         'prerequisites' => request()->get('prerequisites',''),
-        'status' => request()->get('status',''),
 
     ]);
     return redirect()->route('subject.manage');
@@ -54,7 +53,7 @@ class SubjectsController extends Controller
             'description' => $request->input('description'),
             'credits' => $request->input('credits'),
             'prerequisites' => $request->input('prerequisites'),
-            'status' => $request->input('status'),
+            'is_active' => $request->input('is_active'),
         ]);
 
         return redirect()->route('subject.manage')->with('success', 'Subject updated successfully.');

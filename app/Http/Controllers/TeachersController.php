@@ -3,65 +3,79 @@
 namespace App\Http\Controllers;
 use App\Models\Teacher;
 use Illuminate\Http\Request;
-
+use App\Models\Department;
 
 class TeachersController extends Controller
 {
     public function index(){
-        return view(
-            'pages.teacher.manage',
-            [
-                'teachers' => Teacher::all()
-            ]
-        );
+        return view('pages.teacher.manage', [
+            'teachers' => Teacher::all()
+        ]);
     }
 
-    //ADDING A NEW TEACHER INTO THE DATABASE
+    // ADDING A NEW TEACHER INTO THE DATABASE
     public function addForm(){
-        return view('pages.teacher.add');
+        $departments = Department::all();
+        return view('pages.teacher.add', compact('departments'));
     }
 
-    public function store()
+    public function store(Request $request)
     {
-    $teacher =  Teacher::create ([
 
-        'id' => request()->get('id',''),
-        'first_name' => request()->get('first_name',''),
-        'last_name' => request()->get('last_name',''),
-        'middle_initial' => request()->get('middle_initial',''),
-        'degree' => request()->get('degree',''),
-        'birthday' => request()->get('birthday',''),
-        'sex' => request()->get('sex','')
-    ]);
-    return redirect()->route('teacher.manage');
-    }
-
-    //UPDATE THE TEACHER'S INFO INTO THE DATABASE
-    public function editForm($id){
-
-        $teacher = Teacher::findOrFail($id);
-        return view('pages.teacher.edit', compact('teacher'));
-    }
-    public function update(Request $request, $id)
-    {
-        $teacher = Teacher::findOrFail($id);
-
-        $teacher->update([
-            'first_name' => $request->input('first_name'),
-            'last_name' => $request->input('last_name'),
-            'middle_initial' => $request->input('middle_initial'),
-            'degree' => $request->input('degree'),
-            'birthday' => $request->input('birthday'),
-            'sex' => $request->input('sex'),
+        $validatedData = $request->validate([
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'middle_initial' => 'nullable|string|max:255',
+            'degree' => 'required|string|max:255',
+            'birthday' => 'required|date',
+            'sex' => 'required|string|in:F,M,O',
+            'department_id' => 'required|exists:departments,id',
         ]);
 
-         // Update the email based on the updated first name and last name
-         $lastNameLowercase = strtolower($teacher->last_name);
-         $firstNameLowercase = strtolower($teacher->first_name);
-         $firstName = str_replace(' ', '_', $firstNameLowercase);
-         $email = $lastNameLowercase . '.' . $firstName . '@glu.edu.ph';
-         $teacher->email = $email;
-         $teacher->save();
+        $teacher = Teacher::create($validatedData);
+
+        // Update the email based on the updated first name and last name
+        $lastNameLowercase = strtolower($teacher->last_name);
+        $firstNameLowercase = strtolower($teacher->first_name);
+        $firstName = str_replace(' ', '_', $firstNameLowercase);
+        $email = $lastNameLowercase . '.' . $firstName . '@glu.edu.ph';
+        $teacher->email = $email;
+        $teacher->save();
+
+        return redirect()->route('teacher.manage')->with('success', 'Teacher added successfully.');
+    }
+
+    // UPDATE THE TEACHER'S INFO INTO THE DATABASE
+    public function editForm($id){
+        $teacher = Teacher::findOrFail($id);
+        $departments = Department::all();
+
+        return view('pages.teacher.edit', compact('teacher', 'departments'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $validatedData = $request->validate([
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'middle_initial' => 'nullable|string|max:255',
+            'degree' => 'required|string|max:255',
+            'birthday' => 'required|date',
+            'sex' => 'required|string|in:F,M,O',
+            'is_active' => 'required|integer|in:0,1',
+            'department_id' => 'required|exists:departments,id',
+        ]);
+
+        $teacher = Teacher::findOrFail($id);
+        $teacher->update($validatedData);
+
+        // Update the email based on the updated first name and last name
+        $lastNameLowercase = strtolower($teacher->last_name);
+        $firstNameLowercase = strtolower($teacher->first_name);
+        $firstName = str_replace(' ', '_', $firstNameLowercase);
+        $email = $lastNameLowercase . '.' . $firstName . '@glu.edu.ph';
+        $teacher->email = $email;
+        $teacher->save();
 
         return redirect()->route('teacher.manage')->with('success', 'Teacher updated successfully.');
     }
@@ -70,7 +84,6 @@ class TeachersController extends Controller
     public function destroy($id)
     {
         $teacher = Teacher::findOrFail($id);
-
         $teacher->delete();
 
         return redirect()->route('teacher.manage')->with('success', 'Teacher deleted successfully.');

@@ -38,35 +38,25 @@
                         </div>
 
                         <div class="mb-3">
-                            <label for="program" class="form-label">Program</label>
-                            <select class="form-select" id="program" name="program" required>
+                            <label for="program_id" class="form-label">Program</label>
+                            <select class="form-select" id="program_id" name="program_id" required>
                                 <option value="">Select Program</option>
-                                <option value="Bachelor in Fine Arts"
-                                    {{ $student->program == 'Bachelor in Fine Arts' ? 'selected' : '' }}>Bachelor in Fine
-                                    Arts</option>
-                                <option value="Bachelor of Science in Information Technology"
-                                    {{ $student->program == 'Bachelor of Science in Information Technology' ? 'selected' : '' }}>
-                                    Bachelor of Science in Information Technology (BSIT)</option>
-                                <option value="Bachelor of Science in Computer Science"
-                                    {{ $student->program == 'Bachelor of Science in Computer Science' ? 'selected' : '' }}>
-                                    Bachelor of Science in Computer Science (BSCS)</option>
-                                <option value="Bachelor of Science in Medical Technology"
-                                    {{ $student->program == 'Bachelor of Science in Medical Technology' ? 'selected' : '' }}>
-                                    Bachelor of Science in Medical Technology (BSMT)</option>
-                                <option value="Bachelor of Science in Nursing"
-                                    {{ $student->program == 'Bachelor of Science in Nursing' ? 'selected' : '' }}>Bachelor
-                                    of Science in Nursing (BSN)</option>
+                                @foreach ($programs as $program)
+                                    <option value="{{ $program->id }}" @if ($student->program_id == $program->id) selected @endif>
+                                        {{ $program->name }}</option>
+                                @endforeach
                             </select>
                             <div class="invalid-feedback">
                                 Please select a program.
                             </div>
                         </div>
+
                         <div class="mb-3">
-                            <label for="year" class="form-label">Year</label>
-                            <input type="number" class="form-control" id="year" name="year"
-                                value="{{ $student->year }}" required>
+                            <label for="year_level" class="form-label">Year Level</label>
+                            <input type="number" class="form-control" id="year_level" name="year_level"
+                                value="{{ $student->year_level }}" required>
                             <div class="invalid-feedback">
-                                Please enter the student's year.
+                                Please enter the student's year level.
                             </div>
                         </div>
                         <div class="mb-3">
@@ -89,6 +79,18 @@
                                 Please select the student's sex.
                             </div>
                         </div>
+                        <div class="mb-3">
+                            <label for="is_active" class="form-label">Currently Enrolled?</label>
+                            <select class="form-select" id="is_active" name="is_active" required>
+                                <option value="">Select</option>
+                                <option value="1" {{ $student->is_active == 1 ? 'selected' : '' }}>Yes</option>
+                                <option value="0" {{ $student->is_active == 0 ? 'selected' : '' }}>No</option>
+                            </select>
+                            <div class="invalid-feedback">
+                                Please select the student's enrollment status.
+                            </div>
+                        </div>
+
                         <button type="submit" class="btn btn-primary">Update</button>
                     </form>
                 </div>

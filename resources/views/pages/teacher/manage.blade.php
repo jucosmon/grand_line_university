@@ -15,6 +15,8 @@
                                 <th>Birthday</th>
                                 <th>Sex</th>
                                 <th>Email</th>
+                                <th>Department</th>
+                                <th>Enrolled</th>
                                 <th>Update</th>
                                 <th>Delete</th>
                             </tr>
@@ -30,6 +32,8 @@
                                     <td>{{ $teacher['birthday'] }}</td>
                                     <td>{{ $teacher['sex'] }}</td>
                                     <td>{{ $teacher['email'] }}</td>
+                                    <td>{{ $teacher->is_active ? 'Active' : 'Inactive' }}</td>
+                                    <td>{{ $teacher->department->code }}</td>
                                     <td>
                                         <a href="{{ route('teacher.edit_page', $teacher['id']) }}" class="btn btn-warning">
                                             <i class="bi bi-pencil-square"></i>
@@ -52,6 +56,8 @@
                             {{-- Add empty rows to fill up to 10 --}}
                             @for ($i = count($teachers); $i < 10; $i++)
                                 <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
                                     <td>&nbsp;</td>
                                     <td>&nbsp;</td>
                                     <td>&nbsp;</td>

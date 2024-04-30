@@ -19,16 +19,27 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('/deleteCookie', [LoginController::class, 'deleteCookies'])->name('deleteCookies');
 Route::get('/', [HomePageController::class, 'index'])->name('home_page');
 
-// Manage student
+// Manage student routes
 Route::prefix('/students')->group(function () {
+    // Display the student management page
     Route::get('/manage', [StudentsController::class, 'index'])->name('student.manage');
-    Route::get('/create', [StudentsController::class, 'store'])->name('student.create');
-    Route::get('/add_form', [StudentsController::class, 'addForm'])->name('student.add_page');
-    Route::get('/{id}/edit_form', [StudentsController::class, 'editForm'])->name('student.edit_page');
-    Route::put('/{id}/update', [StudentsController::class, 'update'])->name('student.update');
-    Route::delete('/{id}/delete', [StudentsController::class, 'destroy'])->name('student.delete');
 
+    // Show the form for creating a new student
+    Route::get('/create', [StudentsController::class, 'addForm'])->name('student.create');
+
+    // Store a newly created student
+    Route::post('/store', [StudentsController::class, 'store'])->name('student.store');
+
+    // Show the form for editing a student
+    Route::get('/{id}/edit_form', [StudentsController::class, 'editForm'])->name('student.edit_page');
+
+    // Update the specified student
+    Route::put('/{id}/update', [StudentsController::class, 'update'])->name('student.update');
+
+    // Delete the specified student
+    Route::delete('/{id}/delete', [StudentsController::class, 'destroy'])->name('student.delete');
 });
+
 
 // Manage teacher
 Route::prefix('/teachers')->group(function () {

@@ -10,7 +10,7 @@ return new class extends Migration
     public function up(): void
     {
         // creating department table
-        Schema::create('department', function (Blueprint $table){
+        Schema::create('departments', function (Blueprint $table){
             $table->id();
             $table->string('code')->unique();
             $table->string('name');
@@ -19,7 +19,7 @@ return new class extends Migration
         });
 
         // creating program table
-        Schema::create('program', function(Blueprint $table){
+        Schema::create('programs', function(Blueprint $table){
             $table->id();
             $table->string('code')->unique();
             $table->string('name');
@@ -28,7 +28,7 @@ return new class extends Migration
             $table->foreignId('department_id')->constrained()->onDelete('restrict');
         });
         //creating teacher table
-        Schema::create('teacher', function (Blueprint $table) {
+        Schema::create('teachers', function (Blueprint $table) {
             $table->id();
             $table->string('first_name');
             $table->string('last_name');
@@ -44,7 +44,7 @@ return new class extends Migration
         });
 
         // creating student's table
-        Schema::create('student', function (Blueprint $table) {
+        Schema::create('students', function (Blueprint $table) {
             $table->id();
             $table->string('first_name');
             $table->string('last_name');
@@ -60,18 +60,18 @@ return new class extends Migration
         });
 
         //creating subject table
-        Schema::create('subject', function (Blueprint $table) {
+        Schema::create('subjects', function (Blueprint $table) {
             $table->id(); // Auto-incrementing ID
             $table->string('code')->unique(); // Subject Code
             $table->string('name');
             $table->text('description')->nullable();
-            $table->float('credit');
-            $table->string('prerequisite')->nullable();
+            $table->float('credits');
+            $table->string('prerequisites')->nullable();
             $table->integer('is_active')->default(1);
             $table->timestamps();
         });
 
-        Schema::create('subject_offering', function (Blueprint $table){
+        Schema::create('subject_offerings', function (Blueprint $table){
             $table->id();
             $table->string('academic_year');
             $table->integer('semester');
@@ -81,7 +81,7 @@ return new class extends Migration
             $table->foreignId('subject_id')->constrained()->onDelete('cascade');
         });
 
-        Schema::create('section', function (Blueprint $table){
+        Schema::create('sections', function (Blueprint $table){
             $table->id();
             $table->integer('section_number');
             $table->string('schedule')->nullable();
@@ -91,7 +91,8 @@ return new class extends Migration
             $table->foreignId('offering_id')->constrained()->onDelete('cascade');
             $table->foreignId('teacher_id')->nullable()->constrained()->onDelete('set null');
         });
-        Schema::create('enrollment', function (Blueprint $table){
+
+        Schema::create('enrollments', function (Blueprint $table){
             $table->id();
             $table->timestamps();
             $table->foreignId('student_id')->constrained()->onDelete('cascade');
