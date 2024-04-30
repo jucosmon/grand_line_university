@@ -25,7 +25,7 @@ class Student extends Authenticatable
     {
         return $this->belongsTo(Program::class);
     }
-    // Override the boot method to add event listeners
+
     protected static function boot()
     {
         parent::boot();
@@ -45,4 +45,5 @@ class Student extends Authenticatable
             $student->save(); // Save the model to update the password field
         });
     }
+
 }

@@ -8,6 +8,15 @@
                     <div class="section-heading">
                         <h2>Add Teacher</h2>
                     </div>
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                     <form action="{{ route('teacher.create') }}" method="get" class="custom-form">
                         @csrf
                         <div class="mb-3">
@@ -82,6 +91,7 @@
                                 Please select the teacher's department.
                             </div>
                         </div>
+
                         <button type="submit" class="btn btn-primary">Add</button>
                     </form>
                 </div>

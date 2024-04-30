@@ -47,4 +47,5 @@ class Teacher extends Model
             $teacher->save(); // Save the model to update the password field
         });
     }
+
 }

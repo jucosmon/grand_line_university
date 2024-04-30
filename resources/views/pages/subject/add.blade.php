@@ -8,6 +8,15 @@
                     <div class="section-heading">
                         <h2>Add Subject</h2>
                     </div>
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                     <form action="{{ route('subject.create') }}" method="get" class="custom-form">
                         @csrf
                         <div class="mb-3">

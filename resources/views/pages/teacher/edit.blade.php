@@ -3,11 +3,24 @@
 @section('content')
     <section class="section contact" data-section="section6" style="background-color: #132c33; color: white;">
         <div class="container">
+
+
             <div class="row justify-content-center">
                 <div class="col-md-6">
                     <div class="section-heading">
+
                         <h2>Edit Teacher</h2>
                     </div>
+
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                     <form id="updateForm" action="{{ route('teacher.update', $teacher->id) }}" method="POST"
                         class="custom-form">
                         @csrf
@@ -94,6 +107,18 @@
                             </select>
                             <div class="invalid-feedback">
                                 Please select the teacher's department.
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="is_active" class="form-label">Active Status</label>
+                            <select class="form-select" id="is_active" name="is_active" required>
+                                <option value="">Select</option>
+                                <option value="1" {{ $teacher->is_active == 1 ? 'selected' : '' }}>Active
+                                </option>
+                                <option value="0" {{ $teacher->is_active == 0 ? 'selected' : '' }}>Inactive</option>
+                            </select>
+                            <div class="invalid-feedback">
+                                Please select the teacher's enrollment status.
                             </div>
                         </div>
 

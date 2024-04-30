@@ -34,7 +34,7 @@ return new class extends Migration
             $table->string('last_name');
             $table->char('middle_initial')->nullable();
             $table->string('email')->unique();
-            $table->string('password');
+            $table->string('password')->default('password123');
             $table->date('birthday')->nullable();
             $table->char('sex');
             $table->string('degree');
@@ -50,7 +50,7 @@ return new class extends Migration
             $table->string('last_name');
             $table->char('middle_initial')->nullable();
             $table->string('email')->unique();
-            $table->string('password');
+            $table->string('password')->default('password123');
             $table->integer('year_level');
             $table->date('birthday')->nullable();
             $table->char('sex');
@@ -88,7 +88,7 @@ return new class extends Migration
             $table->string('room')->nullable();
             $table->integer('capacity')->default('40');
             $table->timestamps();
-            $table->foreignId('offering_id')->constrained()->onDelete('cascade');
+            $table->foreignId('subject_offering_id')->constrained()->onDelete('cascade');
             $table->foreignId('teacher_id')->nullable()->constrained()->onDelete('set null');
         });
 

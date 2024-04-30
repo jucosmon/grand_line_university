@@ -8,6 +8,15 @@
                     <div class="section-heading">
                         <h2>Edit Student</h2>
                     </div>
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                     <form id="updateForm" action="{{ route('student.update', $student->id) }}" method="POST"
                         class="custom-form">
                         @csrf

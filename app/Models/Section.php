@@ -14,17 +14,17 @@ class Section extends Model
         'schedule',
         'room',
         'capacity',
-        'offering_id',
+        'subject_offering_id',
         'teacher_id',
     ];
 
     public function offering()
     {
-        return $this->belongsTo(SubjectOffering::class, 'offering_id');
+        return $this->belongsTo(SubjectOffering::class);
     }
 
     public function teacher()
     {
-        return $this->belongsTo(Teacher::class, 'teacher_id');
+        return $this->belongsTo(Teacher::class);
     }
 }

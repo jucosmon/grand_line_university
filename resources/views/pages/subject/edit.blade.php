@@ -8,6 +8,15 @@
                     <div class="section-heading">
                         <h2>Edit Subject</h2>
                     </div>
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                     <form id="updateForm" action="{{ route('subject.update', $subject->id) }}" method="POST"
                         class="custom-form">
                         @csrf
@@ -56,9 +65,9 @@
                                 Please select the status of the subject.
                             </div>
                         </div>
-
+                        <button type="submit" class="btn btn-primary">Update</button>
                 </div>
-                <button type="submit" class="btn btn-primary">Update</button>
+
                 </form>
             </div>
         </div>

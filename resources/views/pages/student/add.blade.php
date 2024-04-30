@@ -8,6 +8,15 @@
                     <div class="section-heading">
                         <h2>Add Student</h2>
                     </div>
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                     <form action="{{ route('student.create') }}" method="get" class="custom-form">
                         @csrf
                         <div class="mb-3">
@@ -46,10 +55,10 @@
                         </div>
 
                         <div class="mb-3">
-                            <label for="year" class="form-label">Year</label>
-                            <input type="number" class="form-control" id="year" name="year" required>
+                            <label for="year_level" class="form-label">Year Level</label>
+                            <input type="number" class="form-control" id="year_level" name="year_level" required>
                             <div class="invalid-feedback">
-                                Please enter the student's year.
+                                Please enter the student's year level.
                             </div>
                         </div>
                         <div class="mb-3">
@@ -71,7 +80,9 @@
                                 Please select the student's sex.
                             </div>
                         </div>
+
                         <button type="submit" class="btn btn-primary">Add</button>
+
                     </form>
                 </div>
             </div>

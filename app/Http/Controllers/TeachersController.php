@@ -21,7 +21,6 @@ class TeachersController extends Controller
 
     public function store(Request $request)
     {
-
         $validatedData = $request->validate([
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
@@ -32,18 +31,14 @@ class TeachersController extends Controller
             'department_id' => 'required|exists:departments,id',
         ]);
 
-        $teacher = Teacher::create($validatedData);
+        // Generate a unique default password
+        $validatedData['password'] = uniqid(); // Hash the default password
 
-        // Update the email based on the updated first name and last name
-        $lastNameLowercase = strtolower($teacher->last_name);
-        $firstNameLowercase = strtolower($teacher->first_name);
-        $firstName = str_replace(' ', '_', $firstNameLowercase);
-        $email = $lastNameLowercase . '.' . $firstName . '@glu.edu.ph';
-        $teacher->email = $email;
-        $teacher->save();
+        Teacher::create($validatedData);
 
         return redirect()->route('teacher.manage')->with('success', 'Teacher added successfully.');
     }
+
 
     // UPDATE THE TEACHER'S INFO INTO THE DATABASE
     public function editForm($id){

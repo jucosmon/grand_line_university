@@ -21,22 +21,11 @@ Route::get('/', [HomePageController::class, 'index'])->name('home_page');
 
 // Manage student routes
 Route::prefix('/students')->group(function () {
-    // Display the student management page
     Route::get('/manage', [StudentsController::class, 'index'])->name('student.manage');
-
-    // Show the form for creating a new student
-    Route::get('/create', [StudentsController::class, 'addForm'])->name('student.create');
-
-    // Store a newly created student
-    Route::post('/store', [StudentsController::class, 'store'])->name('student.store');
-
-    // Show the form for editing a student
+    Route::get('/add', [StudentsController::class, 'store'])->name('student.create');
+    Route::get('/add_form', [StudentsController::class, 'addForm'])->name('student.add_page');
     Route::get('/{id}/edit_form', [StudentsController::class, 'editForm'])->name('student.edit_page');
-
-    // Update the specified student
     Route::put('/{id}/update', [StudentsController::class, 'update'])->name('student.update');
-
-    // Delete the specified student
     Route::delete('/{id}/delete', [StudentsController::class, 'destroy'])->name('student.delete');
 });
 
@@ -44,7 +33,7 @@ Route::prefix('/students')->group(function () {
 // Manage teacher
 Route::prefix('/teachers')->group(function () {
     Route::get('/manage', [TeachersController::class, 'index'])->name('teacher.manage');
-    Route::get('/create', [TeachersController::class, 'store'])->name('teacher.create');
+    Route::get('/add', [TeachersController::class, 'store'])->name('teacher.create');
     Route::get('/add_form', [TeachersController::class, 'addForm'])->name('teacher.add_page');
     Route::get('/{id}/edit_form', [TeachersController::class, 'editForm'])->name('teacher.edit_page');
     Route::put('/{id}/update', [TeachersController::class, 'update'])->name('teacher.update');
@@ -55,7 +44,7 @@ Route::prefix('/teachers')->group(function () {
 // Manage subject
 Route::prefix('/subjects')->group(function () {
     Route::get('/manage', [SubjectsController::class, 'index'])->name('subject.manage');
-    Route::get('/create', [SubjectsController::class, 'store'])->name('subject.create');
+    Route::get('/add', [SubjectsController::class, 'store'])->name('subject.create');
     Route::get('/add_form', [SubjectsController::class, 'addForm'])->name('subject.add_page');
     Route::get('/{id}/edit_form', [SubjectsController::class, 'editForm'])->name('subject.edit_page');
     Route::put('/{id}/update', [SubjectsController::class, 'update'])->name('subject.update');

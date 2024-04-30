@@ -27,19 +27,25 @@ class StudentsController extends Controller
 
     public function store(Request $request)
     {
+
         $validatedData = $request->validate([
-            'first_name' => 'required|string',
-            'last_name' => 'required|string',
-            'middle_initial' => 'nullable|string',
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'middle_initial' => 'nullable|string|max:255',
             'year_level' => 'required|integer',
             'birthday' => 'required|date',
             'sex' => 'required|string|in:F,M,O',
             'program_id' => 'required|exists:programs,id',
         ]);
 
-        $student = Student::create($validatedData);
-        return redirect()->route('student.manage');
+
+        $validatedData['password'] = uniqid();
+
+        Student::create($validatedData);
+        return redirect()->route('student.manage')->with('success', 'Student added successfully.');
     }
+
+
 
     public function editForm($id)
     {
@@ -61,6 +67,7 @@ class StudentsController extends Controller
             'sex' => 'required|string|in:F,M,O',
             'program_id' => 'required|exists:programs,id',
             'is_active' => 'required|integer|in:0,1',
+
         ]);
 
         $student->update($validatedData);
