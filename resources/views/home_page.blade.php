@@ -12,14 +12,12 @@
                 <h6>Management Information System</h6>
                 <h2><em>Grand Line</em> University</h2>
                 <div class="main-button">
-                    <div class="scroll-to-section"><a href="#section2">Welcome</a></div>
+                    <div class="scroll-to-section"><a href="#section4">Welcome Administrator</a></div>
                 </div>
             </div>
         </div>
     </section>
     <!-- ***** Main Banner Area End ***** -->
-
-
     <section class="features">
         <div class="container">
             <div class="row">
@@ -71,144 +69,125 @@
         </div>
     </section>
 
-    <section class="section why-us" data-section="section2">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="section-heading">
-                        <h2>Why choose Grand Line University?</h2>
-                    </div>
-                </div>
-                <div class="col-md-12">
-                    <div id='tabs'>
-                        <ul>
-                            <li><a href='#tabs-1'>Best Education</a></li>
-                            <li><a href='#tabs-2'>Top Management</a></li>
-                            <li><a href='#tabs-3'>Quality Meeting</a></li>
-                        </ul>
-                        <section class='tabs-content'>
-                            <article id='tabs-1'>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <img src="assets/images/choose-us-image-01.png" alt="">
-                                    </div>
-                                    <div class="col-md-6">
-                                        <h4>Best Education</h4>
-                                        <p>Grand Line University is where students embark on exciting educational journeys,
-                                            inspired by the legendary Grand Line's spirit of adventure. Here, ambition
-                                            thrives, and students are encouraged to explore their passions and unlock their
-                                            full potential in a vibrant and supportive community.</p>
-                                    </div>
-                                </div>
-                            </article>
-                            <article id='tabs-2'>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <img src="assets/images/choose-us-image-02.png" alt="">
-                                    </div>
-                                    <div class="col-md-6">
-                                        <h4>Top Level</h4>
-                                        <p>At Grand Line University, excellence is not just a goal—it's a way of life. With
-                                            a distinguished faculty and visionary leadership, the university sets the
-                                            standard for academic excellence and innovation. From top-tier administrators to
-                                            dedicated educators, every aspect of the institution is meticulously curated to
-                                            ensure the highest quality of education and student experience.</p>
-                                    </div>
-                                </div>
-                            </article>
-                            <article id='tabs-3'>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <img src="assets/images/choose-us-image-03.png" alt="">
-                                    </div>
-                                    <div class="col-md-6">
-                                        <h4>Quality Meeting</h4>
-                                        <p>Grand Line University prides itself on providing top-notch resources and
-                                            facilities, ensuring that every student has access to the tools they need to
-                                            succeed. From state-of-the-art meeting rooms equipped with the latest technology
-                                            to comprehensive research facilities, the university spares no effort in
-                                            delivering a high-quality learning environment. With a commitment to excellence
-                                            in every aspect, Grand Line University empowers students to thrive and excel in
-                                            their academic pursuits.</p>
-                                    </div>
-                                </div>
-                            </article>
-                        </section>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-
-
     <section class="section courses" data-section="section4">
-        <div class="container-fluid">
+        <style>
+            /* Custom CSS for margin between rows */
+            .custom-card-row {
+                display: flex;
+                flex-wrap: wrap;
+                margin: -15px 0;
+            }
+
+            .custom-card-col {
+                flex: 0 0 calc(25% - 30px);
+                /* Adjust the width of each card column */
+                margin: 15px 0;
+                padding: 0 15px;
+            }
+
+            .card {
+                width: 100%;
+            }
+        </style>
+        <div class="container">
             <div class="row">
                 <div class="col-md-12">
                     <div class="section-heading">
                         <h2>Admin Management</h2>
                     </div>
                 </div>
-                <div class="row row-cols-1 row-cols-md-5 g-4">
-                    <div class="col">
-                        <div class="card rounded">
-                            <img src="assets/images/courses-01.jpg" class="card-img-top" alt="Course #1">
-                            <div class="card-body d-flex flex-column">
-                                <h5 class="card-title flex-fill">Teacher</h5>
-                                <p class="card-text flex-fill">Manage your school's teaching staff efficiently.</p>
-                                <a href="{{ route('teacher.manage') }}" class="btn btn-sm btn-warning align-self-end">Manage
-                                    <i class="fa fa-angle-double-right"></i></a>
-                            </div>
+            </div>
+            <div class="custom-card-row">
+                <div class="custom-card-col">
+                    <div class="card rounded">
+                        <img src="assets/images/courses-01.jpg" class="card-img-top" alt="Course #1">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title flex-fill">Department</h5>
+                            <p class="card-text flex-fill">Manage your school's department efficiently.</p>
+                            <a href="#" class="btn btn-sm btn-warning align-self-end">Manage
+                                <i class="fa fa-angle-double-right"></i></a>
                         </div>
                     </div>
-                    <div class="col">
-                        <div class="card rounded">
-                            <img src="assets/images/courses-02.jpg" class="card-img-top" alt="Course #2">
-                            <div class="card-body d-flex flex-column">
-                                <h5 class="card-title flex-fill">Student</h5>
-                                <p class="card-text flex-fill">Organize student information effectively.</p>
-                                <a href="{{ route('student.manage') }}" class="btn btn-sm btn-warning align-self-end">Manage
-                                    <i class="fa fa-angle-double-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card rounded">
-                            <img src="assets/images/courses-03.jpg" class="card-img-top" alt="Course #3">
-                            <div class="card-body d-flex flex-column">
-                                <h5 class="card-title flex-fill">Subject</h5>
-                                <p class="card-text flex-fill">Plan and manage subject information seamlessly.</p>
-                                <a href="{{ route('subject.manage') }}"
-                                    class="btn btn-sm btn-warning align-self-end">Manage <i
-                                        class="fa fa-angle-double-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card rounded">
-                            <img src="assets/images/courses-04.jpg" class="card-img-top" alt="Course #4">
-                            <div class="card-body d-flex flex-column">
-                                <h5 class="card-title flex-fill">Section</h5>
-                                <p class="card-text flex-fill">Allocate and manage section information easily.</p>
-                                <a href="#" class="btn btn-sm btn-warning align-self-end">Manage <i
-                                        class="fa fa-angle-double-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card rounded">
-                            <img src="assets/images/courses-05.jpg" class="card-img-top" alt="">
-                            <div class="card-body d-flex flex-column">
-                                <h5 class="card-title flex-fill">Enrollment</h5>
-                                <p class="card-text flex-fill">Simplify student enrollment processes efficiently.</p>
-                                <a href="#" class="btn btn-sm btn-warning align-self-end">Manage <i
-                                        class="fa fa-angle-double-right"></i></a>
-                            </div>
+                </div>
+                <!-- Add similar code blocks for other cards -->
+                <div class="custom-card-col">
+                    <div class="card rounded">
+                        <img src="assets/images/courses-01.jpg" class="card-img-top" alt="Course #1">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title flex-fill">Program</h5>
+                            <p class="card-text flex-fill">Manage your school's programs efficiently.</p>
+                            <a href="#" class="btn btn-sm btn-warning align-self-end">Manage
+                                <i class="fa fa-angle-double-right"></i></a>
                         </div>
                     </div>
                 </div>
 
+                <div class="custom-card-col">
+                    <div class="card rounded">
+                        <img src="assets/images/courses-01.jpg" class="card-img-top" alt="Course #1">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title flex-fill">Teacher</h5>
+                            <p class="card-text flex-fill">Manage your school's teaching staff efficiently.</p>
+                            <a href="{{ route('teacher.manage') }}" class="btn btn-sm btn-warning align-self-end">Manage
+                                <i class="fa fa-angle-double-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="custom-card-col">
+                    <div class="card rounded">
+                        <img src="assets/images/courses-02.jpg" class="card-img-top" alt="Course #2">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title flex-fill">Student</h5>
+                            <p class="card-text flex-fill">Organize student information effectively.</p>
+                            <a href="{{ route('student.manage') }}" class="btn btn-sm btn-warning align-self-end">Manage
+                                <i class="fa fa-angle-double-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="custom-card-col">
+                    <div class="card rounded">
+                        <img src="assets/images/courses-03.jpg" class="card-img-top" alt="Course #3">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title flex-fill">Subject</h5>
+                            <p class="card-text flex-fill">Plan and manage subject information seamlessly.</p>
+                            <a href="{{ route('subject.manage') }}" class="btn btn-sm btn-warning align-self-end">Manage
+                                <i class="fa fa-angle-double-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="custom-card-col">
+                    <div class="card rounded">
+                        <img src="assets/images/courses-01.jpg" class="card-img-top" alt="Course #1">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title flex-fill">Subject Offering</h5>
+                            <p class="card-text flex-fill">Manage your school's course offering.</p>
+                            <a href="#" class="btn btn-sm btn-warning align-self-end">Manage
+                                <i class="fa fa-angle-double-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="custom-card-col">
+                    <div class="card rounded">
+                        <img src="assets/images/courses-01.jpg" class="card-img-top" alt="Course #1">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title flex-fill">Section</h5>
+                            <p class="card-text flex-fill">Manage your the section of each subject .</p>
+                            <a href="#" class="btn btn-sm btn-warning align-self-end">Manage
+                                <i class="fa fa-angle-double-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="custom-card-col">
+                    <div class="card rounded">
+                        <img src="assets/images/courses-01.jpg" class="card-img-top" alt="Course #1">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title flex-fill">Enrollment</h5>
+                            <p class="card-text flex-fill">Manage your school's enrollment.</p>
+                            <a href="#" class="btn btn-sm btn-warning align-self-end">Manage
+                                <i class="fa fa-angle-double-right"></i></a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>

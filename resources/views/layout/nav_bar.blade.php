@@ -13,21 +13,32 @@
         <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
             <ul class="navbar-nav" style="font-family: 'Montserrat', sans-serif; font-weight: 600">
                 <li class="nav-item">
-                    <a class="nav-link text-light" href="{{ route('teacher.manage') }}">Teacher</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-light" href="{{ route('student.manage') }}">Student</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-light" href="{{ route('subject.manage') }}">Subject</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-light" href="#">Room</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-light" href="#">Enrollment</a>
+                    <a class="nav-link text-light active" aria-current="page" href="/">Home</a>
                 </li>
 
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-light" href="#" id="menuDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Management
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="menuDropdown">
+                        <a class="dropdown-item" href="{{ route('teacher.manage') }}">Teacher</a>
+                        <a class="dropdown-item" href="{{ route('student.manage') }}">Student</a>
+                        <a class="dropdown-item" href="{{ route('subject.manage') }}">Subject</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Department</a>
+                        <a class="dropdown-item" href="#">Program</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Courses</a>
+                        <a class="dropdown-item" href="#">Course Offering</a>
+                        <a class="dropdown-item" href="#">Section</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Enrollment</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-light" href="#">Profile</a>
+                </li>
             </ul>
         </div>
     </div>
