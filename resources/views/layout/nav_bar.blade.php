@@ -28,7 +28,7 @@
                         <a class="dropdown-item" href="{{ route('department.manage') }}">Department</a>
                         <a class="dropdown-item" href="{{ route('program.manage') }}">Program</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Subject</a>
+                        <a class="dropdown-item" href="{{ route('subject.manage') }}">Subject</a>
                         <a class="dropdown-item" href="#">Subject Offering</a>
                         <a class="dropdown-item" href="#">Section</a>
                         <div class="dropdown-divider"></div>
