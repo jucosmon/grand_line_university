@@ -1,7 +1,9 @@
 <?php
 //use App\Http\Middleware\CheckUserType;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\DepartmentsController;
 use App\Http\Controllers\HomePageController;
+use App\Http\Controllers\ProgramsController;
 use App\Http\Controllers\StudentsController;
 use App\Http\Controllers\SubjectsController;
 use App\Http\Controllers\TeachersController;
@@ -50,6 +52,29 @@ Route::prefix('/subjects')->group(function () {
     Route::put('/{id}/update', [SubjectsController::class, 'update'])->name('subject.update');
     Route::delete('/{id}/delete', [SubjectsController::class, 'destroy'])->name('subject.delete');
 });
+
+// Manage Department
+Route::prefix('/departments')->group(function () {
+    Route::get('/manage', [DepartmentsController::class, 'index'])->name('department.manage');
+    Route::get('/add', [DepartmentsController::class, 'store'])->name('department.create');
+    Route::get('/add_form', [DepartmentsController::class, 'addForm'])->name('department.add_page');
+    Route::get('/{id}/edit_form', [DepartmentsController::class, 'editForm'])->name('department.edit_page');
+    Route::put('/{id}/update', [DepartmentsController::class, 'update'])->name('department.update');
+    Route::delete('/{id}/delete', [DepartmentsController::class, 'destroy'])->name('department.delete');
+});
+
+// Manage Program
+Route::prefix('/programs')->group(function () {
+    Route::get('/manage', [ProgramsController::class, 'index'])->name('program.manage');
+    Route::get('/add', [ProgramsController::class, 'store'])->name('program.create');
+    Route::get('/add_form', [ProgramsController::class, 'addForm'])->name('program.add_page');
+    Route::get('/{id}/edit_form', [ProgramsController::class, 'editForm'])->name('program.edit_page');
+    Route::put('/{id}/update', [ProgramsController::class, 'update'])->name('program.update');
+    Route::delete('/{id}/delete', [ProgramsController::class, 'destroy'])->name('program.delete');
+});
+
+
+
 /* Redirect unauthenticated users to login page
 Route::get('/home', function () {
     return redirect()->route('login');

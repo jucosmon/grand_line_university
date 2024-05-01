@@ -22,18 +22,21 @@ class SubjectsController extends Controller
     public function addForm(){
         return view('pages.subject.add');
     }
-    public function store()
+    public function store(Request $request)
     {
-    $subject =  Subject::create ([
 
-        'code' => request()->get('code',''),
-        'name' => request()->get('name',''),
-        'description' => request()->get('description',''),
-        'credits' => request()->get('credits',''),
-        'prerequisites' => request()->get('prerequisites',''),
+        $validatedData = $request->validate([
+            'code' => 'required|string|max:10|unique:subjects,code,' . ($request->route('id') ?? 'NULL') . ',id',
+            'name' => 'required|string',
+            'description' => 'required|string',
+            'credits' => 'required|string',
+            'prerequisites' => 'required|string',
 
-    ]);
-    return redirect()->route('subject.manage');
+        ]);
+
+    Subject::create ($validatedData);
+
+    return redirect()->route('subject.manage')->with('success', 'Subject added successfully.');
     }
 
 
@@ -47,14 +50,17 @@ class SubjectsController extends Controller
     {
         $subject = Subject::findOrFail($id);
 
-        $subject->update([
-            'code' => $request->input('code'),
-            'name' => $request->input('name'),
-            'description' => $request->input('description'),
-            'credits' => $request->input('credits'),
-            'prerequisites' => $request->input('prerequisites'),
-            'is_active' => $request->input('is_active'),
+        $validatedData = $request->validate([
+            'code' => 'required|string|max:10|unique:subjects,code,' . ($request->route('id') ?? 'NULL') . ',id',
+            'name' => 'required|string',
+            'description' => 'required|string',
+            'credits' => 'required|string',
+            'prerequisites' => 'required|string',
+            'is_active' => 'required|integer|in:0,1',
+
         ]);
+
+        $subject->update($validatedData);
 
         return redirect()->route('subject.manage')->with('success', 'Subject updated successfully.');
     }

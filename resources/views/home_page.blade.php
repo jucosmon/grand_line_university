@@ -97,14 +97,14 @@
                     </div>
                 </div>
             </div>
-            <div class="custom-card-row">
+            <div class="custom-card-row justify-content-center">
                 <div class="custom-card-col">
                     <div class="card rounded">
                         <img src="assets/images/courses-01.jpg" class="card-img-top" alt="Course #1">
                         <div class="card-body d-flex flex-column">
                             <h5 class="card-title flex-fill">Department</h5>
                             <p class="card-text flex-fill">Manage your school's department efficiently.</p>
-                            <a href="#" class="btn btn-sm btn-warning align-self-end">Manage
+                            <a href="{{ route('department.manage') }}" class="btn btn-sm btn-warning align-self-end">Manage
                                 <i class="fa fa-angle-double-right"></i></a>
                         </div>
                     </div>
@@ -116,7 +116,7 @@
                         <div class="card-body d-flex flex-column">
                             <h5 class="card-title flex-fill">Program</h5>
                             <p class="card-text flex-fill">Manage your school's programs efficiently.</p>
-                            <a href="#" class="btn btn-sm btn-warning align-self-end">Manage
+                            <a href="{{ route('program.manage') }}" class="btn btn-sm btn-warning align-self-end">Manage
                                 <i class="fa fa-angle-double-right"></i></a>
                         </div>
                     </div>
