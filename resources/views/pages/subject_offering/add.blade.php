@@ -6,7 +6,7 @@
             <div class="row justify-content-center">
                 <div class="col-md-6">
                     <div class="section-heading">
-                        <h2>Add Student</h2>
+                        <h2>Offer a New Subject</h2>
                     </div>
                     @if ($errors->any())
                         <div class="alert alert-danger">
@@ -17,37 +17,45 @@
                             </ul>
                         </div>
                     @endif
-                    <form action="{{ route('student.create') }}" method="get" class="custom-form">
+                    <form action="{{ route('subject_offering.create') }}" method="get" class="custom-form">
                         @csrf
 
                         {{-- Cancel Button --}}
                         <div class="mb-3">
-                            <a href="{{ route('student.manage') }}" class="btn btn-secondary">
+                            <a href="{{ route('subject_offering.manage') }}" class="btn btn-secondary">
                                 <i class="bi bi-x-lg"></i>
                             </a>
                         </div>
                         <div class="mb-3">
-                            <label for="first_name" class="form-label">First Name</label>
-                            <input type="text" class="form-control" id="first_name" name="first_name" required>
+                            <label for="subject_id" class="form-label">Subject to be offered</label>
+                            <select class="form-select" id="subject_id" name="subject_id" required>
+                                <option value="">Select Subject</option>
+                                @foreach ($subjects as $subject)
+                                    <option value="{{ $subject->id }}">{{ $subject->name }}</option>
+                                @endforeach
+                            </select>
                             <div class="invalid-feedback">
-                                Please enter the student's first name.
+                                Please select a subject.
                             </div>
                         </div>
                         <div class="mb-3">
-                            <label for="middle_initial" class="form-label">Middle Initial</label>
-                            <input type="text" class="form-control" id="middle_initial" name="middle_initial" required>
+                            <label for="academic_year" class="form-label">Academic Year</label>
+                            <input type="text" class="form-control" id="academic_year" name="academic_year" required>
                             <div class="invalid-feedback">
-                                Please enter the student's middle initial.
+                                Please enter the what Academic Year the subject will be offered.
                             </div>
                         </div>
                         <div class="mb-3">
-                            <label for="last_name" class="form-label">Last Name</label>
-                            <input type="text" class="form-control" id="last_name" name="last_name" required>
+                            <label for="semester" class="form-label">Semester</label>
+                            <select class="form-select" id="semester" name="semester" required>
+                                <option value="1">1st Semester</option>
+                                <option value="2">2nd Semester</option>
+                                <option value="3">Summer</option>
+                            </select>
                             <div class="invalid-feedback">
-                                Please enter the student's last name.
+                                Please select the semester.
                             </div>
                         </div>
-
                         <div class="mb-3">
                             <label for="program_id" class="form-label">Program</label>
                             <select class="form-select" id="program_id" name="program_id" required>
@@ -60,31 +68,11 @@
                                 Please select a program.
                             </div>
                         </div>
-
                         <div class="mb-3">
                             <label for="year_level" class="form-label">Year Level</label>
                             <input type="number" class="form-control" id="year_level" name="year_level" required>
                             <div class="invalid-feedback">
-                                Please enter the student's year level.
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <label for="birthday" class="form-label">Birthday</label>
-                            <input type="date" class="form-control" id="birthday" name="birthday" required>
-                            <div class="invalid-feedback">
-                                Please enter the student's birthday.
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <label for="sex" class="form-label">Sex</label>
-                            <select class="form-select" id="sex" name="sex" required>
-                                <option value="">Select Sex</option>
-                                <option value="F">Female</option>
-                                <option value="M">Male</option>
-                                <option value="O">Others</option>
-                            </select>
-                            <div class="invalid-feedback">
-                                Please select the student's sex.
+                                Please enter what year level the subject will be offered.
                             </div>
                         </div>
 

@@ -26,4 +26,8 @@ class SubjectOffering extends Model
     {
         return $this->belongsTo(Subject::class);
     }
+    public function sections()
+    {
+        return $this->hasMany(Section::class);
+    }
 }

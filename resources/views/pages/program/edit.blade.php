@@ -25,6 +25,12 @@
                         class="custom-form">
                         @csrf
                         @method('PUT')
+                        {{-- Cancel Button --}}
+                        <div class="mb-3">
+                            <a href="{{ route('program.manage') }}" class="btn btn-secondary">
+                                <i class="bi bi-x-lg"></i>
+                            </a>
+                        </div>
                         <div class="mb-3">
                             <label for="code" class="form-label">Program Code</label>
                             <input type="text" class="form-control" id="code" name="code"
