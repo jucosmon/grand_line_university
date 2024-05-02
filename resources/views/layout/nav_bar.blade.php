@@ -29,10 +29,10 @@
                         <a class="dropdown-item" href="{{ route('program.manage') }}">Program</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="{{ route('subject.manage') }}">Subject</a>
-                        <a class="dropdown-item" href="{{ route('subject_offering.manage') }}">Subject Offering</a>
-                        <a class="dropdown-item" href="#">Section</a>
+                        <a class="dropdown-item" href="{{ route('subject_offering.manage') }}">Subjects Offered &
+                            Section</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Enrollment</a>
+                        <a class="dropdown-item" href="">Enrollment</a>
                     </div>
                 </li>
                 <li class="nav-item">

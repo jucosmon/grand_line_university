@@ -18,7 +18,7 @@ class Section extends Model
         'teacher_id',
     ];
 
-    public function offering()
+    public function subject_offering()
     {
         return $this->belongsTo(SubjectOffering::class);
     }

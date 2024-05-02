@@ -3,6 +3,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\DepartmentsController;
 use App\Http\Controllers\HomePageController;
 use App\Http\Controllers\ProgramsController;
+use App\Http\Controllers\SectionsController;
 use App\Http\Controllers\StudentsController;
 use App\Http\Controllers\SubjectOfferingsController;
 use App\Http\Controllers\SubjectsController;
@@ -73,5 +74,16 @@ Route::prefix('/subject-offerings')->group(function () {
     Route::get('/{id}/edit_form', [SubjectOfferingsController::class, 'editForm'])->name('subject_offering.edit_page');
     Route::put('/{id}/update', [SubjectOfferingsController::class, 'update'])->name('subject_offering.update');
     Route::delete('/{id}/delete', [SubjectOfferingsController::class, 'destroy'])->name('subject_offering.delete');
+
+    //Manage Sections under each subject
+    Route::prefix('/sections')->group(function () {
+        Route::get('/{id}/manage', [SubjectOfferingsController::class, 'viewSections'])->name('subject_offering.section.manage');
+        Route::get('/{id}/add', [SubjectOfferingsController::class, 'storeSection'])->name('subject_offering.section.create');
+        Route::get('/{id}/add_form', [SubjectOfferingsController::class, 'addSectionForm'])->name('subject_offering.section.add_page');
+        Route::get('/{id}/edit_form', [SubjectOfferingsController::class, 'editSectionForm'])->name('subject_offering.section.edit_page');
+        Route::put('/{id}/update', [SubjectOfferingsController::class, 'updateSection'])->name('subject_offering.section.update');
+        Route::delete('/{id}/delete', [SubjectOfferingsController::class, 'deleteSection'])->name('subject_offering.section.delete');
+    });
+
 });
 

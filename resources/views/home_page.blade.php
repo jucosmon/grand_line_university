@@ -161,18 +161,8 @@
                         <div class="card-body d-flex flex-column">
                             <h5 class="card-title flex-fill">Subject Offering</h5>
                             <p class="card-text flex-fill">Manage your school's course offering.</p>
-                            <a href="#" class="btn btn-sm btn-warning align-self-end">Manage
-                                <i class="fa fa-angle-double-right"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="custom-card-col">
-                    <div class="card rounded">
-                        <img src="assets/images/courses-01.jpg" class="card-img-top" alt="Course #1">
-                        <div class="card-body d-flex flex-column">
-                            <h5 class="card-title flex-fill">Section</h5>
-                            <p class="card-text flex-fill">Manage your the section of each subject .</p>
-                            <a href="#" class="btn btn-sm btn-warning align-self-end">Manage
+                            <a href="{{ route('subject_offering.manage') }}"
+                                class="btn btn-sm btn-warning align-self-end">Manage
                                 <i class="fa fa-angle-double-right"></i></a>
                         </div>
                     </div>
@@ -183,7 +173,7 @@
                         <div class="card-body d-flex flex-column">
                             <h5 class="card-title flex-fill">Enrollment</h5>
                             <p class="card-text flex-fill">Manage your school's enrollment.</p>
-                            <a href="#" class="btn btn-sm btn-warning align-self-end">Manage
+                            <a href="" class="btn btn-sm btn-warning align-self-end">Manage
                                 <i class="fa fa-angle-double-right"></i></a>
                         </div>
                     </div>
