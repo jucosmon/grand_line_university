@@ -17,4 +17,5 @@ class Subject extends Model
         'status',
         'is_active'
     ];
+
 }

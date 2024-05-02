@@ -30,7 +30,7 @@ class SubjectsController extends Controller
             'name' => 'required|string',
             'description' => 'required|string',
             'credits' => 'required|string',
-            'prerequisites' => 'required|string',
+            'prerequisites' => 'nullable|string', // Make prerequisite optional
 
         ]);
 
@@ -55,8 +55,9 @@ class SubjectsController extends Controller
             'name' => 'required|string',
             'description' => 'required|string',
             'credits' => 'required|string',
-            'prerequisites' => 'required|string',
             'is_active' => 'required|integer|in:0,1',
+            'prerequisites' => 'nullable|string', // Make prerequisite optional
+
 
         ]);
 

@@ -1,6 +1,7 @@
 <?php
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\DepartmentsController;
+use App\Http\Controllers\EnrollmentsController;
 use App\Http\Controllers\HomePageController;
 use App\Http\Controllers\ProgramsController;
 use App\Http\Controllers\SectionsController;
@@ -87,3 +88,12 @@ Route::prefix('/subject-offerings')->group(function () {
 
 });
 
+// Manage Program
+Route::prefix('/enrollment')->group(function () {
+    // routes/web.php
+    Route::get('/index', [EnrollmentsController::class, 'index'])->name('enrollment.index');
+    Route::get('/search', [EnrollmentsController::class, 'search'])->name('enrollment.search');
+    Route::get('/enroll', [EnrollmentsController::class, 'enroll'])->name('enrollment.enroll');
+    Route::delete('/{student_id}/{section_id}/delete', [EnrollmentsController::class, 'delete'])->name('enrollment.delete');
+
+});

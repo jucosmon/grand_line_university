@@ -32,7 +32,7 @@
                         <a class="dropdown-item" href="{{ route('subject_offering.manage') }}">Subjects Offered &
                             Section</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="">Enrollment</a>
+                        <a class="dropdown-item" href="{{ route('enrollment.index') }}">Enrollment</a>
                     </div>
                 </li>
                 <li class="nav-item">

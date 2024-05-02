@@ -27,4 +27,9 @@ class Section extends Model
     {
         return $this->belongsTo(Teacher::class);
     }
+    public function enrollment()
+    {
+        return $this->belongsToMany(Student::class, 'enrollment', 'section_id', 'student_id');
+    }
+
 }

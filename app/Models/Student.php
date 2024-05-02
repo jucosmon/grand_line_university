@@ -2,6 +2,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class Student extends Authenticatable
@@ -25,7 +26,20 @@ class Student extends Authenticatable
     {
         return $this->belongsTo(Program::class);
     }
+    public function enrollment()
+    {
+        return $this->belongsToMany(Enrollment::class);
+    }
 
+    
+    
+
+    public function sections(): BelongsToMany
+    {
+        return $this->belongsToMany(Section::class, 'enrollments', 'student_id', 'section_id')
+            ->withTimestamps(); // Assuming your enrollment table has timestamps
+    }
+    
     protected static function boot()
     {
         parent::boot();
