@@ -17,28 +17,30 @@ class EnrollmentsController extends Controller
 
     public function search(Request $request)
     {
-        // Validate input
-        $request->validate([
-            'student_id' => 'required|exists:students,id',
-        ]);
-    
         // Fetch student data and enrolled sections
         $student = Student::find($request->student_id);
+
+        if (!$student) {
+            return redirect()->route('enrollment.index')->with('error', 'Student ID not found.');
+        }
+
         $enrolledSections = $student->sections ?? collect(); // Initialize as an empty collection if null
-    
+
         // Fetch available subject offerings and sections for enrollment
-        $availableSubjectOfferings = SubjectOffering::all();
+// Fetch available subject offerings and sections for enrollment
+        $availableSubjectOfferings = SubjectOffering::where('program_id', $student->program_id)
+        ->where('year_level', $student->year_level)->get();
         $availableSubjectOfferings->load('sections'); // Load sections for each subject offering
         $availableSections = collect();
-    
+
         foreach ($availableSubjectOfferings as $subjectOffering) {
             $sections = $subjectOffering->sections()->whereNotIn('id', $enrolledSections->pluck('id'))->get();
             $availableSections[$subjectOffering->id] = $sections;
         }
-    
+
         return view('pages.enrollment.index', compact('student', 'enrolledSections', 'availableSubjectOfferings', 'availableSections'));
     }
-    
+
 
     public function enroll(Request $request)
     {
@@ -50,10 +52,23 @@ class EnrollmentsController extends Controller
 
         // Logic to enroll the student in the selected section
         $student = Student::find($request->student_id);
-        $student->sections()->attach($request->section_id);
+        $section = Section::find($request->section_id);
+        $subject_offering = $section->subject_offering;
+
+        // Check if the student is already enrolled in a section for the same subject offering
+        $enrolledSection = $student->sections()->whereHas('subject_offering', function ($query) use ($subject_offering) {
+            $query->where('id', $subject_offering->id);
+        })->first();
+
+        if ($enrolledSection) {
+            return redirect()->back()->with('error', 'You are already enrolled in a section for this subject offering.');
+        }
+
+        $student->sections()->attach($section);
 
         return redirect()->back()->with('success', 'Enrollment successful.');
     }
+
 
     public function delete($studentId, $sectionId)
     {
