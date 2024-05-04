@@ -5,6 +5,47 @@
         <h1 class="text-center mb-3">Manage Subject Offerings</h1>
         <div class="row justify-content-center">
             <div class="col-md-10">
+                <div class="d-flex justify-content-end mt-3 mb-lg-3">
+                    <form action="{{ route('subject_offering.manage') }}" method="GET" class="d-flex">
+                        @csrf
+                        <div class="mr-2">
+                            <select name="term" onchange="this.form.submit()" class="form-control">
+                                <option value="view_all" @selected($selectedTerm == 'view_all')>All Academic Terms</option>
+                                @foreach ($terms as $term)
+                                    <option value="{{ $term->id }}" @selected($selectedTerm == $term->id)>
+                                        {{ $term->academic_year }} {{ $term->semester }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="mr-2">
+                            <select name="program" onchange="this.form.submit()" class="form-control">
+                                <option value="view_all" {{ $selectedProgram == 'view_all' ? 'selected' : '' }}>All
+                                    Programs
+                                </option>
+                                @foreach ($programs as $id => $name)
+                                    <option value="{{ $id }}" {{ $selectedProgram == $id ? 'selected' : '' }}>
+                                        {{ $name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="mr-2">
+                            <select name="year" onchange="this.form.submit()" class="form-control">
+                                <option value="view_all" {{ $selectedYear == 'view_all' ? 'selected' : '' }}>All Year
+                                    level
+                                </option>
+                                @foreach ($years as $year)
+                                    <option value="{{ $year }}" {{ $selectedYear == $year ? 'selected' : '' }}>
+                                        {{ $year }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </form>
+                </div>
+
                 <div class="table-responsive" style="max-height: 60vh; overflow-y: auto;">
                     <table class="table table-striped table-bordered table-hover" style="color: #212529;">
                         <thead class="thead-light">

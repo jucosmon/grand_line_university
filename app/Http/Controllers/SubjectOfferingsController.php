@@ -14,11 +14,37 @@ use App\Models\Term;
 class SubjectOfferingsController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
-        $subject_offerings = SubjectOffering::all();
-        return view('pages.subject_offering.manage', compact('subject_offerings'));
+        $years = [1,2,3,4,5];
+        $programs = Program::pluck('code', 'id');
+        $selectedProgram = $request->input('program', 'view_all');
+        $terms = Term::select('id', 'academic_year','semester')->get();
+        $selectedYear = $request->input('year', 'view_all');
+        $selectedTerm = $request->input('term', 'view_all');
+
+        $subject_offeringsQuery = SubjectOffering::query();
+
+        $subject_offeringsQuery->when($selectedTerm !== 'view_all', function ($query) use ($selectedTerm) {
+            // Filter by specific term
+            $query->where('term_id', $selectedTerm);
+        });
+
+        $subject_offeringsQuery->when($selectedProgram !== 'view_all', function ($query) use ($selectedProgram) {
+            // Filter by specific program
+            $query->where('program_id', $selectedProgram);
+        });
+
+        $subject_offeringsQuery->when($selectedYear !== 'view_all', function ($query) use ($selectedYear) {
+            // Filter by specific year level
+            $query->where('year_level', $selectedYear);
+        });
+
+        $subject_offerings = $subject_offeringsQuery->get();
+
+        return view('pages.subject_offering.manage', compact('terms', 'selectedTerm','programs', 'selectedProgram', 'selectedYear','years', 'subject_offerings'));
     }
+
 
     public function addForm()
     {

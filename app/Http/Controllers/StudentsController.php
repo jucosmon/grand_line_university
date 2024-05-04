@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Department;
 use App\Models\Student;
 use App\Models\Program;
 use Illuminate\Http\Request;
@@ -13,11 +14,33 @@ class StudentsController extends Controller
         return view('student.home_page');
     }
 
-    public function index()
-    {
-        $students = Student::all();
-        return view('pages.student.manage', compact('students'));
+    public function index(Request $request)
+{
+    $years = [1,2,3,4,5];
+    $programs = Program::pluck('code', 'id');
+    $selectedProgram = $request->input('program');
+
+    $selectedYear = $request->input('year');
+
+    $studentsQuery = Student::query();
+
+    // Check if "View All" is selected or a specific program is selected
+    if ($selectedProgram && $selectedProgram !== 'view_all') {
+        // Filter by specific program
+        $studentsQuery->where('program_id', $selectedProgram);
     }
+
+    if ($selectedYear && $selectedYear !== 'view_all') {
+        // Filter by specific year level
+        $studentsQuery->where('year_level', $selectedYear);
+    }
+
+    $students = $studentsQuery->get();
+
+    return view('pages.student.manage', compact('programs', 'selectedProgram', 'selectedYear','years', 'students'));
+}
+
+
 
     public function addForm()
     {

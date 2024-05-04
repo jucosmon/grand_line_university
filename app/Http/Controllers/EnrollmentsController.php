@@ -68,7 +68,7 @@ class EnrollmentsController extends Controller
         })->first();
 
         if ($enrolledSection) {
-            return redirect()->back()->with('error', 'You are already enrolled in a section for this subject offering.');
+            return redirect()->back()->with('error', 'Student is already enrolled for this subject but in another section .');
         }
 
         $student->sections()->attach($section);
