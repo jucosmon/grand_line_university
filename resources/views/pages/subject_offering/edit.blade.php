@@ -42,8 +42,8 @@
                             </div>
                         </div>
                         <div class="mb-3">
-                            <label for="term" class="form-label">Select Term</label>
-                            <select class="form-select" id="term" name="term" required>
+                            <label for="term_id" class="form-label">Select Term</label>
+                            <select class="form-select" id="term_id" name="term_id" required>
                                 @foreach ($terms as $term)
                                     @if ($term->semester === '1st')
                                         <option value="{{ $term->id }}"

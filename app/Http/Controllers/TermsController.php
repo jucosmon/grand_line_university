@@ -43,6 +43,12 @@ class TermsController extends Controller
         if ($existingTerm) {
             return redirect()->back()->withErrors(['term' => 'That term has already been created.'])->withInput();
         }
+        // Check if there is already an active term
+        $activeTerm = Term::where('status', 'active')->exists();
+
+        if ($validatedData['status'] === 'active' && $activeTerm) {
+            return redirect()->back()->withErrors(['term' => 'There is already an active term.'])->withInput();
+        }
 
         Term::create ($validatedData);
          return redirect()->route('term.manage');
@@ -77,7 +83,8 @@ class TermsController extends Controller
          $existingTerm = Term::where([
             'academic_year' => $validatedData['academic_year'],
             'semester' => $validatedData['semester'],
-        ])->exists();
+        ])->where('id', '!=', $id)->exists();
+
 
         if ($existingTerm) {
             return redirect()->back()->withErrors(['term' => 'That term already existed.'])->withInput();

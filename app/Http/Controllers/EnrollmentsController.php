@@ -6,6 +6,7 @@ use App\Models\Enrollment;
 use App\Models\Student;
 use App\Models\Section;
 use App\Models\SubjectOffering;
+use App\Models\Term;
 use Illuminate\Http\Request;
 
 class EnrollmentsController extends Controller
@@ -26,11 +27,17 @@ class EnrollmentsController extends Controller
 
         $enrolledSections = $student->sections ?? collect(); // Initialize as an empty collection if null
 
-        // Fetch available subject offerings and sections for enrollment
-// Fetch available subject offerings and sections for enrollment
+
+        $activeTermId = Term::where('status', 'active')->pluck('id');
+
+
         $availableSubjectOfferings = SubjectOffering::where('program_id', $student->program_id)
-        ->where('year_level', $student->year_level)->get();
-        $availableSubjectOfferings->load('sections'); // Load sections for each subject offering
+            ->where('year_level', $student->year_level)
+            ->whereIn('term_id', $activeTermId)
+            ->get();
+
+        $availableSubjectOfferings->load('sections');
+
         $availableSections = collect();
 
         foreach ($availableSubjectOfferings as $subjectOffering) {
