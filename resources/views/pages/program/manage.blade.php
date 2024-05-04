@@ -3,8 +3,22 @@
 @section('content')
     <div class="container-fluid py-4 nav-covered-area" style="background-color: #f8f9fa; color: #212529;">
         <h1 class="text-center mb-3">Manage Programs</h1>
+
         <div class="row justify-content-center">
             <div class="col-md-10">
+                <div class="d-flex justify-content-end mt-3 mb-lg-3">
+                    <form action="{{ route('program.manage') }}" method="GET">
+                        @csrf
+                        <select name="department" onchange="this.form.submit()">
+                            <option value="view_all" {{ $selectedDepartment == 'view_all' ? 'selected' : '' }}>View All
+                            </option>
+                            @foreach ($departments as $id => $code)
+                                <option value="{{ $id }}" {{ $selectedDepartment == $id ? 'selected' : '' }}>
+                                    {{ $code }}</option>
+                            @endforeach
+                        </select>
+                    </form>
+                </div>
                 <div class="table-responsive" style="max-height: 60vh; overflow-y: auto;">
                     <table class="table table-striped table-bordered table-hover" style="color: #212529;">
                         <thead class="thead-light">

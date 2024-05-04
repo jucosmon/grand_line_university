@@ -27,7 +27,7 @@
                                     <td>{{ $student->id }}</td>
                                     <td>{{ $student->first_name }} {{ $student->middle_initial }} {{ $student->last_name }}
                                     </td>
-                                    <td>{{ $student->program->name }} {{ $student->year }}</td>
+                                    <td>{{ $student->program->code }} {{ $student->year_level }}</td>
                                     <td>{{ $student->birthday }}</td>
                                     <td>{{ $student->sex }}</td>
                                     <td>{{ $student->email }}</td>

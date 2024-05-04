@@ -9,13 +9,24 @@ use Illuminate\Http\Request;
 class ProgramsController extends Controller
 {
     //
-    public function index(){
-        return view(
-            'pages.program.manage',
-            [
-                'programs' => Program::all()
-            ]
-        );
+    public function index(Request $request)
+    {
+        $departments = Department::pluck('code', 'id'); // Retrieve department codes
+        $selectedDepartment = $request->input('department'); // Get selected department from request
+
+        $programsQuery = Program::query();
+
+        // Check if "View All" is selected or a specific department is selected
+        if ($selectedDepartment && $selectedDepartment !== 'view_all') {
+            // Filter by specific department
+            $programsQuery->whereHas('department', function ($query) use ($selectedDepartment) {
+                $query->where('id', $selectedDepartment);
+            });
+        }
+
+        $programs = $programsQuery->get();
+
+        return view('pages.program.manage', compact('departments', 'selectedDepartment', 'programs'));
     }
 
 

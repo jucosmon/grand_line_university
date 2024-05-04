@@ -5,6 +5,19 @@
         <h1 class="text-center mb-3">Manage Teachers</h1>
         <div class="row justify-content-center">
             <div class="col-md-10">
+                <div class="d-flex justify-content-end mt-3 mb-lg-3">
+                    <form action="{{ route('teacher.manage') }}" method="GET">
+                        @csrf
+                        <select name="department" onchange="this.form.submit()">
+                            <option value="view_all" {{ $selectedDepartment == 'view_all' ? 'selected' : '' }}>View All
+                            </option>
+                            @foreach ($departments as $id => $code)
+                                <option value="{{ $id }}" {{ $selectedDepartment == $id ? 'selected' : '' }}>
+                                    {{ $code }}</option>
+                            @endforeach
+                        </select>
+                    </form>
+                </div>
                 <div class="table-responsive" style="max-height: 60vh; overflow-y: auto;">
                     <table class="table table-striped table-bordered table-hover" style="color: #212529;">
                         <thead class="thead-light">
@@ -32,8 +45,9 @@
                                     <td>{{ $teacher['birthday'] }}</td>
                                     <td>{{ $teacher['sex'] }}</td>
                                     <td>{{ $teacher['email'] }}</td>
-                                    <td>{{ $teacher->is_active ? 'Active' : 'Inactive' }}</td>
                                     <td>{{ $teacher->department->code }}</td>
+
+                                    <td>{{ $teacher->is_active ? 'Active' : 'Inactive' }}</td>
                                     <td>
                                         <a href="{{ route('teacher.edit_page', $teacher['id']) }}" class="btn btn-warning">
                                             <i class="bi bi-pencil-square"></i>

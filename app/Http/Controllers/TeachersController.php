@@ -7,10 +7,23 @@ use App\Models\Department;
 
 class TeachersController extends Controller
 {
-    public function index(){
-        return view('pages.teacher.manage', [
-            'teachers' => Teacher::all()
-        ]);
+    public function index(Request $request){
+        $departments = Department::pluck('code', 'id'); // Retrieve department codes
+        $selectedDepartment = $request->input('department'); // Get selected department from request
+
+        $teachersQuery = Teacher::query();
+
+        // Check if "View All" is selected or a specific department is selected
+        if ($selectedDepartment && $selectedDepartment !== 'view_all') {
+            // Filter by specific department
+            $teachersQuery->whereHas('department', function ($query) use ($selectedDepartment) {
+                $query->where('id', $selectedDepartment);
+            });
+        }
+
+        $teachers = $teachersQuery->get();
+
+        return view('pages.teacher.manage', compact('departments', 'selectedDepartment', 'teachers'));
     }
 
     // ADDING A NEW TEACHER INTO THE DATABASE
