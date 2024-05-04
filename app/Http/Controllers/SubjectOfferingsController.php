@@ -9,6 +9,7 @@ use App\Models\SubjectOffering;
 use Illuminate\Http\Request;
 use App\Models\Teacher;
 use App\Models\Department;
+use App\Models\Term;
 
 class SubjectOfferingsController extends Controller
 {
@@ -23,27 +24,31 @@ class SubjectOfferingsController extends Controller
     {
         $programs = Program::all();
         $subjects = Subject::all();
-        return view('pages.subject_offering.add', compact('programs', 'subjects'));
+        $terms = Term::all();
+
+        return view('pages.subject_offering.add', compact('programs', 'subjects', 'terms'));
     }
 
 
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'academic_year' => 'required|string|max:255',
-            'semester' => 'required|integer|max:3',
+
             'year_level' => 'required|integer',
             'program_id' => 'required|exists:programs,id',
             'subject_id' => 'required|exists:subjects,id',
+            'term_id' => 'required|exists:terms,id',
+
         ]);
 
         // Check if subject offering already exists
         $existingOffering = SubjectOffering::where([
-            'academic_year' => $validatedData['academic_year'],
-            'semester' => $validatedData['semester'],
+
             'year_level' => $validatedData['year_level'],
             'program_id' => $validatedData['program_id'],
             'subject_id' => $validatedData['subject_id'],
+            'term_id' => $validatedData['term_id'],
+
         ])->exists();
 
         if ($existingOffering) {
@@ -60,8 +65,9 @@ class SubjectOfferingsController extends Controller
         $subject_offering = SubjectOffering::findOrFail($id);
         $programs = Program::all();
         $subjects = Subject::all();
+        $terms = Term::all();
 
-        return view('pages.subject_offering.edit', compact('subject_offering', 'programs', 'subjects'));
+        return view('pages.subject_offering.edit', compact('subject_offering', 'programs', 'subjects','terms'));
     }
 
     public function update(Request $request, $id)
@@ -69,21 +75,23 @@ class SubjectOfferingsController extends Controller
         $subject_offering = SubjectOffering::findOrFail($id);
 
         $validatedData = $request->validate([
-            'academic_year' => 'required|string|max:255',
-            'semester' => 'required|integer|max:3',
+
             'year_level' => 'required|integer',
             'program_id' => 'required|exists:programs,id',
             'subject_id' => 'required|exists:subjects,id',
+            'term_id' => 'required|exists:terms,id',
+
 
         ]);
 
           // Check if subject offering already exists
           $existingOffering = SubjectOffering::where([
-            'academic_year' => $validatedData['academic_year'],
-            'semester' => $validatedData['semester'],
+
             'year_level' => $validatedData['year_level'],
             'program_id' => $validatedData['program_id'],
             'subject_id' => $validatedData['subject_id'],
+            'term_id' => $validatedData['term_id'],
+
         ])->exists();
 
         if ($existingOffering) {

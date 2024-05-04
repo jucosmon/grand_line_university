@@ -37,7 +37,7 @@
                                 @foreach ($teachers as $teacher)
                                     <option value="{{ $teacher->id }}"
                                         {{ $section->teacher_id == $teacher->id ? 'selected' : '' }}>
-                                        {{ $teacher->first_name }} {{ $teacher->last_name }}
+                                        {{ $teacher->first_name }} {{ $teacher->middle_initial }} {{ $teacher->last_name }}
                                     </option>
                                 @endforeach
                             </select>

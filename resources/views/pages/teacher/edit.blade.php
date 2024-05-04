@@ -75,6 +75,14 @@
                                 <option value="Bachelor of Science in Nursing"
                                     {{ $teacher->degree == 'Bachelor of Science in Nursing' ? 'selected' : '' }}>Bachelor
                                     of Science in Nursing (BSN)</option>
+
+                                <option value="Bachelor of Science in Accountancy"
+                                    {{ $teacher->degree == 'Bachelor of Science in Accountancy' ? 'selected' : '' }}>
+                                    Bachelor of Science in Accountancy (BSA)</option>
+                                <option value="Bachelor of Science in Financial Management"
+                                    {{ $teacher->degree == 'Bachelor of Science in Financial Management' ? 'selected' : '' }}>
+                                    Bachelor
+                                    of Science in Financial Management (BSFM)</option>
                             </select>
                             <div class="invalid-feedback">
                                 Please select a degree.

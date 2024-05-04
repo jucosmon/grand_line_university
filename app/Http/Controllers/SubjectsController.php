@@ -2,25 +2,38 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Department;
 use App\Models\Subject;
 use Illuminate\Http\Request;
 
 class SubjectsController extends Controller
 {
     //
-    public function index(){
-        return view(
-            'pages.subject.manage',
-            [
-                'subjects' => Subject::all()
-            ]
-        );
+    public function index(Request $request){
+        $departments = Department::pluck('code', 'id'); // Retrieve department codes
+        $selectedDepartment = $request->input('department'); // Get selected department from request
+
+        $subjectsQuery = Subject::query();
+
+        // Check if "View All" is selected or a specific department is selected
+        if ($selectedDepartment && $selectedDepartment !== 'view_all') {
+            // Filter by specific department
+            $subjectsQuery->whereHas('department', function ($query) use ($selectedDepartment) {
+                $query->where('id', $selectedDepartment);
+            });
+        }
+
+        $subjects = $subjectsQuery->get();
+
+        return view('pages.subject.manage', compact('departments', 'selectedDepartment', 'subjects'));
     }
 
 
     //ADDING NEW SUBJECT
     public function addForm(){
-        return view('pages.subject.add');
+        $departments = Department::all();
+
+        return view('pages.subject.add', compact('departments'));
     }
     public function store(Request $request)
     {
@@ -31,6 +44,8 @@ class SubjectsController extends Controller
             'description' => 'required|string',
             'credits' => 'required|string',
             'prerequisites' => 'nullable|string', // Make prerequisite optional
+            'department_id' => 'required|exists:departments,id',
+
 
         ]);
 
@@ -44,7 +59,9 @@ class SubjectsController extends Controller
     public function editForm($id){
 
         $subject = Subject::findOrFail($id);
-        return view('pages.subject.edit', compact('subject'));
+        $departments = Department::all();
+
+        return view('pages.subject.edit', compact('subject', 'departments'));
     }
     public function update(Request $request, $id)
     {
@@ -57,6 +74,8 @@ class SubjectsController extends Controller
             'credits' => 'required|string',
             'is_active' => 'required|integer|in:0,1',
             'prerequisites' => 'nullable|string', // Make prerequisite optional
+            'department_id' => 'required|exists:departments,id',
+
 
 
         ]);

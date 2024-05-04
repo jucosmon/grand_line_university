@@ -15,6 +15,7 @@ class SubjectOffering extends Model
         'year_level',
         'program_id',
         'subject_id',
+        'term_id'
     ];
 
     public function program()
@@ -25,6 +26,11 @@ class SubjectOffering extends Model
     public function subject()
     {
         return $this->belongsTo(Subject::class);
+    }
+
+    public function term()
+    {
+        return $this->belongsTo(Term::class);
     }
     public function sections()
     {

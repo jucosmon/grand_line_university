@@ -95,11 +95,10 @@
                                                     <tr>
                                                         <td>{{ $section->subject_offering->subject->code }}</td>
                                                         <td>{{ $section->section_number }}</td>
-                                                        <td> {{ $section->subject_offering->academic_year }}
-                                                            &lpar;
-                                                            @if ($section->subject_offering->semester == 1)
+                                                        <td>{{ $section->subject_offering->term->academic_year }} &lpar;
+                                                            @if ($section->subject_offering->term->semester == '1st')
                                                                 1st Semester
-                                                            @elseif ($section->subject_offering->semester == 2)
+                                                            @elseif ($section->subject_offering->term->semester == '2nd')
                                                                 2nd Semester
                                                             @else
                                                                 Summer
@@ -150,69 +149,74 @@
 
                             <div class="row justify-content-center">
                                 <div class="col-md-10">
-                                    @foreach ($availableSubjectOfferings as $subjectOffering)
-                                        <div class="card mb-4">
-                                            <div class="card-header">{{ $subjectOffering->subject->name }}</div>
-                                            <div class="card-body">
-                                                @if ($availableSections[$subjectOffering->id]->isNotEmpty())
-                                                    <table class="table">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>Subject</th>
-                                                                <th>Section</th>
-                                                                <th>Term</th>
-                                                                <th>Schedule</th>
-                                                                <th>Room</th>
-                                                                <th>Capacity</th>
-                                                                <th>Teacher</th>
-                                                                <th>Action</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            @foreach ($availableSections[$subjectOffering->id] as $section)
+                                    @if ($availableSubjectOfferings->isEmpty())
+                                        <p class="text-center text-white">No available subjects for this term.</p>
+                                    @else
+                                        @foreach ($availableSubjectOfferings as $subjectOffering)
+                                            <div class="card mb-4">
+                                                <div class="card-header">{{ $subjectOffering->subject->name }}</div>
+                                                <div class="card-body">
+                                                    @if ($availableSections[$subjectOffering->id]->isNotEmpty())
+                                                        <table class="table">
+                                                            <thead>
                                                                 <tr>
-                                                                    <td>{{ $section->subject_offering->subject->code }}</td>
-                                                                    <td>{{ $section->section_number }}</td>
-                                                                    <td> {{ $section->subject_offering->academic_year }}
-                                                                        &lpar;
-                                                                        @if ($section->subject_offering->semester == 1)
-                                                                            1st Semester
-                                                                        @elseif ($section->subject_offering->semester == 2)
-                                                                            2nd Semester
-                                                                        @else
-                                                                            Summer
-                                                                        @endif
-                                                                        &rpar;
-                                                                    </td>
-                                                                    <td>{{ $section->schedule }}</td>
-
-                                                                    <td>{{ $section->room }}</td>
-                                                                    <td>{{ $section->capacity }}</td>
-                                                                    <td>{{ $section->teacher->first_name }}
-                                                                        {{ $section->teacher->middle_initial }}
-                                                                        {{ $section->teacher->last_name }}</td>
-                                                                    <td>
-                                                                        <form action="{{ route('enrollment.enroll') }}"
-                                                                            method="GET">
-                                                                            @csrf
-                                                                            <input type="hidden" name="student_id"
-                                                                                value="{{ $student->id }}">
-                                                                            <input type="hidden" name="section_id"
-                                                                                value="{{ $section->id }}">
-                                                                            <button type="submit"
-                                                                                class="btn btn-success">Enroll</button>
-                                                                        </form>
-                                                                    </td>
+                                                                    <th>Subject</th>
+                                                                    <th>Section</th>
+                                                                    <th>Term</th>
+                                                                    <th>Schedule</th>
+                                                                    <th>Room</th>
+                                                                    <th>Capacity</th>
+                                                                    <th>Teacher</th>
+                                                                    <th>Action</th>
                                                                 </tr>
-                                                            @endforeach
-                                                        </tbody>
-                                                    </table>
-                                                @else
-                                                    <p>No available sections for enrollment.</p>
-                                                @endif
+                                                            </thead>
+                                                            <tbody>
+                                                                @foreach ($availableSections[$subjectOffering->id] as $section)
+                                                                    <tr>
+                                                                        <td>{{ $section->subject_offering->subject->code }}
+                                                                        </td>
+                                                                        <td>{{ $section->section_number }}</td>
+                                                                        <td>{{ $section->subject_offering->term->academic_year }}
+                                                                            &lpar;
+                                                                            @if ($section->subject_offering->term->semester == '1st')
+                                                                                1st Semester
+                                                                            @elseif ($section->subject_offering->term->semester == '2nd')
+                                                                                2nd Semester
+                                                                            @else
+                                                                                Summer
+                                                                            @endif
+                                                                            &rpar;
+                                                                        </td>
+                                                                        <td>{{ $section->schedule }}</td>
+
+                                                                        <td>{{ $section->room }}</td>
+                                                                        <td>{{ $section->capacity }}</td>
+                                                                        <td>{{ $section->teacher->first_name }}
+                                                                            {{ $section->teacher->middle_initial }}
+                                                                            {{ $section->teacher->last_name }}</td>
+                                                                        <td>
+                                                                            <form action="{{ route('enrollment.enroll') }}"
+                                                                                method="GET">
+                                                                                @csrf
+                                                                                <input type="hidden" name="student_id"
+                                                                                    value="{{ $student->id }}">
+                                                                                <input type="hidden" name="section_id"
+                                                                                    value="{{ $section->id }}">
+                                                                                <button type="submit"
+                                                                                    class="btn btn-success">Enroll</button>
+                                                                            </form>
+                                                                        </td>
+                                                                    </tr>
+                                                                @endforeach
+                                                            </tbody>
+                                                        </table>
+                                                    @else
+                                                        <p>No available subjects for enrollment.</p>
+                                                    @endif
+                                                </div>
                                             </div>
-                                        </div>
-                                    @endforeach
+                                        @endforeach
+                                    @endif
                                 </div>
                             </div>
                         </div>

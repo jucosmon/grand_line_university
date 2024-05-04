@@ -15,7 +15,12 @@ class Subject extends Model
         'credits',
         'prerequisites',
         'status',
-        'is_active'
+        'is_active',
+        'department_id'
     ];
+    public function department()
+    {
+        return $this->belongsTo(Department::class);
+    }
 
 }

@@ -10,6 +10,19 @@ return new class extends Migration
     public function up(): void
     {
         // creating department table
+        Schema::create('terms', function (Blueprint $table){
+            $table->id();
+            $table->string('academic_year');
+            $table->string('semester');
+            $table->date('start_date')->nullable();
+            $table->date('end_date')->nullable();
+            $table->date('enroll_start')->nullable();
+            $table->date('enroll_end')->nullable(   );
+            $table->string('status')->default('upcoming');
+            $table->timestamps();
+        });
+
+        // creating department table
         Schema::create('departments', function (Blueprint $table){
             $table->id();
             $table->string('code')->unique();
@@ -68,17 +81,18 @@ return new class extends Migration
             $table->float('credits');
             $table->string('prerequisites')->nullable();
             $table->integer('is_active')->default(1);
+            $table->foreignId('department_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
 
         Schema::create('subject_offerings', function (Blueprint $table){
             $table->id();
-            $table->string('academic_year');
-            $table->integer('semester');
             $table->integer('year_level');
             $table->timestamps();
             $table->foreignId('program_id')->constrained()->onDelete('cascade');
             $table->foreignId('subject_id')->constrained()->onDelete('cascade');
+            $table->foreignId('term_id')->constrained()->onDelete('cascade');
+
         });
 
         Schema::create('sections', function (Blueprint $table){
@@ -102,6 +116,7 @@ return new class extends Migration
 
     public function down(): void
     {
+        Schema::dropIfExists('term');
         Schema::dropIfExists('department');
         Schema::dropIfExists('program');
         Schema::dropIfExists('teacher');

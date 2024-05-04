@@ -22,12 +22,15 @@
                         Management
                     </a>
                     <div class="dropdown-menu" aria-labelledby="menuDropdown">
+                        <a class="dropdown-item" href="{{ route('department.manage') }}">Department</a>
+                        <a class="dropdown-item" href="{{ route('program.manage') }}">Program</a>
+                        <a class="dropdown-item" href="{{ route('term.manage') }}">Term</a>
+
+                        <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="{{ route('teacher.manage') }}">Teacher</a>
                         <a class="dropdown-item" href="{{ route('student.manage') }}">Student</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="{{ route('department.manage') }}">Department</a>
-                        <a class="dropdown-item" href="{{ route('program.manage') }}">Program</a>
-                        <div class="dropdown-divider"></div>
+
                         <a class="dropdown-item" href="{{ route('subject.manage') }}">Subject</a>
                         <a class="dropdown-item" href="{{ route('subject_offering.manage') }}">Subjects Offered &
                             Section</a>

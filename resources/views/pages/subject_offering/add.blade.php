@@ -31,7 +31,7 @@
                             <select class="form-select" id="subject_id" name="subject_id" required>
                                 <option value="">Select Subject</option>
                                 @foreach ($subjects as $subject)
-                                    <option value="{{ $subject->id }}">{{ $subject->name }}</option>
+                                    <option value="{{ $subject->id }}">{{ $subject->code }}</option>
                                 @endforeach
                             </select>
                             <div class="invalid-feedback">
@@ -39,21 +39,22 @@
                             </div>
                         </div>
                         <div class="mb-3">
-                            <label for="academic_year" class="form-label">Academic Year</label>
-                            <input type="text" class="form-control" id="academic_year" name="academic_year" required>
-                            <div class="invalid-feedback">
-                                Please enter the what Academic Year the subject will be offered.
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <label for="semester" class="form-label">Semester</label>
-                            <select class="form-select" id="semester" name="semester" required>
-                                <option value="1">1st Semester</option>
-                                <option value="2">2nd Semester</option>
-                                <option value="3">Summer</option>
+                            <label for="term_id" class="form-label">Select Term</label>
+                            <select class="form-select" id="term_id" name="term_id" required>
+                                @foreach ($terms as $term)
+                                    @if ($term->semester === '1st')
+                                        <option value="{{ $term->id }}">{{ $term->academic_year }} (1st Semester)
+                                        </option>
+                                    @elseif ($term->semester === '2nd')
+                                        <option value="{{ $term->id }}">{{ $term->academic_year }} (2nd Semester)
+                                        </option>
+                                    @else
+                                        <option value="{{ $term->id }}">{{ $term->academic_year }} (Summer)</option>
+                                    @endif
+                                @endforeach
                             </select>
                             <div class="invalid-feedback">
-                                Please select the semester.
+                                Please select the term.
                             </div>
                         </div>
                         <div class="mb-3">

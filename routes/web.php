@@ -9,6 +9,7 @@ use App\Http\Controllers\StudentsController;
 use App\Http\Controllers\SubjectOfferingsController;
 use App\Http\Controllers\SubjectsController;
 use App\Http\Controllers\TeachersController;
+use App\Http\Controllers\TermsController;
 use Illuminate\Support\Facades\Route;
 
 // just deleting cookies
@@ -96,4 +97,15 @@ Route::prefix('/enrollment')->group(function () {
     Route::get('/enroll', [EnrollmentsController::class, 'enroll'])->name('enrollment.enroll');
     Route::delete('/{student_id}/{section_id}/delete', [EnrollmentsController::class, 'delete'])->name('enrollment.delete');
 
+});
+
+
+// Manage Department
+Route::prefix('/terms')->group(function () {
+    Route::get('/manage', [TermsController::class, 'index'])->name('term.manage');
+    Route::get('/add', [TermsController::class, 'store'])->name('term.create');
+    Route::get('/add_form', [TermsController::class, 'addForm'])->name('term.add_page');
+    Route::get('/{id}/edit_form', [TermsController::class, 'editForm'])->name('term.edit_page');
+    Route::put('/{id}/update', [TermsController::class, 'update'])->name('term.update');
+    Route::delete('/{id}/delete', [TermsController::class, 'destroy'])->name('term.delete');
 });

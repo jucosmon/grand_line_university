@@ -24,10 +24,10 @@
                                 <tr>
                                     <td>{{ $subject_offering->subject->code }}</td>
                                     <td>{{ $subject_offering->subject->name }}</td>
-                                    <td>{{ $subject_offering->academic_year }} &lpar;
-                                        @if ($subject_offering->semester == 1)
+                                    <td>{{ $subject_offering->term->academic_year }} &lpar;
+                                        @if ($subject_offering->term->semester == '1st')
                                             1st Semester
-                                        @elseif ($subject_offering->semester == 2)
+                                        @elseif ($subject_offering->term->semester == '2nd')
                                             2nd Semester
                                         @else
                                             Summer

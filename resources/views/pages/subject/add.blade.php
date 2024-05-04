@@ -61,6 +61,18 @@
                                 Please enter the pre-requisite course of this subject if applicable.
                             </div>
                         </div>
+                        <div class="mb-3">
+                            <label for="department_id" class="form-label">Department</label>
+                            <select class="form-select" id="department_id" name="department_id" required>
+                                <option value="">Select Department</option>
+                                @foreach ($departments as $department)
+                                    <option value="{{ $department->id }}">{{ $department->name }}</option>
+                                @endforeach
+                            </select>
+                            <div class="invalid-feedback">
+                                Please select the subject's department.
+                            </div>
+                        </div>
 
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>

@@ -61,6 +61,21 @@
                                 value="{{ $subject->prerequisites }}">
                         </div>
                         <div class="mb-3">
+                            <label for="department_id" class="form-label">Department</label>
+                            <select class="form-select" id="department_id" name="department_id" required>
+                                <option value="">Select Department</option>
+                                @foreach ($departments as $department)
+                                    <option value="{{ $department->id }}"
+                                        {{ $teacher->department_id == $department->id ? 'selected' : '' }}>
+                                        {{ $department->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            <div class="invalid-feedback">
+                                Please select the subject's department.
+                            </div>
+                        </div>
+                        <div class="mb-3">
                             <label for="is_active" class="form-label">Status</label>
                             <select class="form-select" id="is_active" name="is_active" required>
                                 <option value="">Select Status</option>

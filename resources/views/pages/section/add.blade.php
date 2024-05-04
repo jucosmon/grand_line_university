@@ -43,7 +43,8 @@
                             <select class="form-select" id="teacher_id" name="teacher_id" required>
                                 <option value="">Select Teacher</option>
                                 @foreach ($teachers as $teacher)
-                                    <option value="{{ $teacher->id }}">{{ $teacher->first_name }} {{ $teacher->last_name }}
+                                    <option value="{{ $teacher->id }}">{{ $teacher->first_name }}
+                                        {{ $teacher->middle_initial }} {{ $teacher->last_name }}
                                     </option>
                                 @endforeach
                             </select>

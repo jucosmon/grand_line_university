@@ -62,6 +62,11 @@
                                     Medical Technology (BSMT)</option>
                                 <option value="Bachelor of Science in Nursing">Bachelor of Science in Nursing (BSN)
                                 </option>
+                                <option value="Bachelor of Science in Accountancy">Bachelor of Science in Accountancy (BSA)
+                                </option>
+                                <option value="Bachelor of Science in Financial Management">Bachelor of Science in Financial
+                                    Management (BSFM)
+                                </option>
                             </select>
                             <div class="invalid-feedback">
                                 Please select teacher's degree.
