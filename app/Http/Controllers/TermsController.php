@@ -90,9 +90,13 @@ class TermsController extends Controller
             return redirect()->back()->withErrors(['term' => 'That term already existed.'])->withInput();
         }
 
+        $activeTerm = Term::where('status', 'active')->where('id', '!=', $id)->exists();
+
+        if ($validatedData['status'] === 'active' && $activeTerm) {
+            return redirect()->back()->withErrors(['term' => 'There is already an active term.'])->withInput();
+        }
+
         $term->update($validatedData);
-
-
         return redirect()->route('term.manage')->with('success', 'term updated successfully.');
     }
 
