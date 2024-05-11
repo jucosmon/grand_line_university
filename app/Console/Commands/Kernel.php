@@ -1,10 +1,7 @@
 <?php
-
 namespace App\Console\Commands;
-use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
-use App\Http\Middleware\CheckUserType;
 
-use Illuminate\Console\Command;
+use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
 class Kernel extends ConsoleKernel
 {
@@ -26,7 +23,6 @@ class Kernel extends ConsoleKernel
      */
     protected $routeMiddleware = [
         // Other middleware entries...
-        'check.user.type' => CheckUserType::class,
     ];
 
     /**
