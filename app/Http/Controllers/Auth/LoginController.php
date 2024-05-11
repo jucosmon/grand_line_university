@@ -32,7 +32,6 @@ class LoginController extends Controller
     {
         $credentials = $request->only('email', 'password', 'user_type');
 
-
         // Determine which table to search based on user_type
         switch ($credentials['user_type']) {
             case 'admin':
@@ -48,24 +47,24 @@ class LoginController extends Controller
                 return back()->withErrors(['email' => 'Invalid user type']);
         }
 
-        if ($user) {
-            // Check if the input password matches the password stored in the database
-            if ($credentials['password'] == $user->password) {
-                Auth::login($user);
-                dump("Login successful");
-                return redirect()->intended(route('home_page'));
+        if ($user && $credentials['password'] === $user->password) {
+            Auth::login($user);
+
+            // Pass user type along with user data
+            return redirect()->intended(route('home_page'))->with('user_type', $credentials['user_type']);
         } else {
-                dd("Invalid credentials"); // Dump error message to terminal
-                return back()->withErrors(['email' => 'Invalid credentials']);
-            }
-        } else {
-            dd("User not found"); // Dump error message to terminal
-            return back()->withErrors(['email' => 'User not found']);
+            return back()->withErrors(['email' => 'Invalid credentials']);
         }
+
     }
+
      // Define the logout() method as before
      public function logout(Request $request)
      {
-         // Your logout logic here
+
+            Auth::logout(); // Log the user out
+            return redirect()->route('login_page'); // Redirect to the login page after logout
+
+
      }
 }

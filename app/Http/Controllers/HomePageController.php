@@ -1,43 +1,38 @@
 <?php
 namespace App\Http\Controllers;
 
-//use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class HomePageController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
-        /*
-        dd("heyu");
-        $user = Auth::user();
+        if (Auth::check()) {
+            $user = Auth::user();
 
-        // Check if the user is authenticated
-        if ($user) {
+            // Retrieve user type from the request or session
+            $userType = $request->session()->get('user_type');
+
             // Redirect based on user type
-            switch ($user->user_type) {
+            switch ($userType) {
                 case 'admin':
                     // Redirect admin to the admin home page
-                    return view('home_page'); // Assuming 'home_page.blade.php' is your admin home page
+                    return view('pages.home_page');
                 case 'teacher':
                     // Redirect teacher to the teacher dashboard or another page
-                    return view('teacher.home_page'); // Assuming 'STUDENT.home_page.blade.php' is your teacher home page
+                    return view('pages.teacher.home_page');
                 case 'student':
                     // Redirect student to the student home page
-                    return view('student.home_page');
+                    return view('pages.student.home_page');
                 default:
-                    dd("unauthorize user");
                     // Handle other user types or unauthorized access
-
-                    return redirect()->route('login');
+                    return redirect()->route('login')->with('error', 'Unauthorized access');
             }
         } else {
             // User is not authenticated, redirect to login page
-            dd("user is not authenticated");
-           return redirect()->route('login');
+            return redirect()->route('login');
         }
-        */
-        return view('home_page');
     }
 }
