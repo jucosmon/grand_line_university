@@ -22,10 +22,10 @@ class HomePageController extends Controller
                     return view('pages.home_page');
                 case 'teacher':
                     // Redirect teacher to the teacher dashboard or another page
-                    return view('pages.teacher.home_page');
+                    return view('pages.teacher.home');
                 case 'student':
                     // Redirect student to the student home page
-                    return view('pages.student.home_page');
+                    return view('pages.student.home');
                 default:
                     // Handle other user types or unauthorized access
                     return redirect()->route('login')->with('error', 'Unauthorized access');
