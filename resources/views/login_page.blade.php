@@ -41,15 +41,15 @@
                             </ul>
                         </div>
                     @endif
-                    <form action="{{ route('login') }}" method="get" class="custom-form">
+                    <form action="{{ route('store_login') }}" method="get" class="custom-form">
                         @csrf
                         <div class="mb-3">
                             <label for="user_type" class="form-label">User Type</label>
                             <select class="form-select" id="user_type" name="user_type" required>
                                 <option value="">Select User Type</option>
                                 <option value="admin">Chairman</option>
-                                <option value="teacher">Teacher</option>
                                 <option value="student">Student</option>
+                                <option value="teacher">Teacher</option>
                             </select>
                         </div>
                         <div class="mb-3">

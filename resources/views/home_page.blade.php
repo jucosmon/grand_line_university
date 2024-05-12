@@ -12,7 +12,7 @@
                 <h6>Management Information System</h6>
                 <h2><em>Grand Line</em> University</h2>
                 <div class="main-button">
-                    <div class="scroll-to-section"><a href="#section4">Welcome Administrator</a></div>
+                    <div class="scroll-to-section"><a href="#section4">Welcome Chairman</a></div>
                 </div>
             </div>
         </div>
@@ -93,7 +93,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="section-heading">
-                        <h2>Admin Management</h2>
+                        <h2>Chairman Management</h2>
                     </div>
                 </div>
             </div>

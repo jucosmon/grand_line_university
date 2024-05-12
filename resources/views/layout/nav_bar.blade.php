@@ -16,28 +16,44 @@
                     <a class="nav-link text-light active" aria-current="page" href="/">Home</a>
                 </li>
 
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle text-light" href="#" id="menuDropdown" role="button"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Management
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="menuDropdown">
-                        <a class="dropdown-item" href="{{ route('department.manage') }}">Department</a>
-                        <a class="dropdown-item" href="{{ route('program.manage') }}">Program</a>
-                        <a class="dropdown-item" href="{{ route('term.manage') }}">Term</a>
+                <!-- ========== This part is for admin only ========== -->
+                @if (session('user_type') === 'admin')
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-light" href="#" id="menuDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Management
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="menuDropdown">
+                            <a class="dropdown-item" href="{{ route('department.manage') }}">Department</a>
+                            <a class="dropdown-item" href="{{ route('program.manage') }}">Program</a>
+                            <a class="dropdown-item" href="{{ route('term.manage') }}">Term</a>
 
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="{{ route('teacher.manage') }}">Teacher</a>
-                        <a class="dropdown-item" href="{{ route('student.manage') }}">Student</a>
-                        <div class="dropdown-divider"></div>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="{{ route('teacher.manage') }}">Teacher</a>
+                            <a class="dropdown-item" href="{{ route('student.manage') }}">Student</a>
+                            <div class="dropdown-divider"></div>
 
-                        <a class="dropdown-item" href="{{ route('subject.manage') }}">Subject</a>
-                        <a class="dropdown-item" href="{{ route('subject_offering.manage') }}">Subjects Offered &
-                            Section</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="{{ route('enrollment.index') }}">Enrollment</a>
-                    </div>
-                </li>
+                            <a class="dropdown-item" href="{{ route('subject.manage') }}">Subject</a>
+                            <a class="dropdown-item" href="{{ route('subject_offering.manage') }}">Subjects Offered &
+                                Section</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="{{ route('enrollment.index') }}">Enrollment</a>
+                        </div>
+                    </li>
+                    <!-- ========== End of admin functionality ========== -->
+                @elseif(session('user_type') === 'student')
+                    <li class="nav-item">
+                        <a class="nav-link text-light" href="{{ route('student.enrollment_page') }}">Enrollment</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-light" href="{{ route('student.academics') }}">Academics</a>
+                    </li>
+                @elseif(session('user_type') === 'teacher')
+                    <li class="nav-item">
+                        <a class="nav-link text-light" href="">Loads</a>
+                    </li>
+                @endif
+
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle text-light" href="#" id="menuDropdown" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

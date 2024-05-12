@@ -1,13 +1,12 @@
 <?php
 
 namespace App\Models;
-
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 
-class Teacher extends Model
-{
+class Teacher extends Authenticatable {
     use HasFactory;
+
     protected $fillable = [
         'first_name',
         'last_name',
@@ -19,9 +18,9 @@ class Teacher extends Model
         'degree',
         'is_active',
         'department_id'
-
-
     ];
+
+
     public function department()
     {
         return $this->belongsTo(Department::class);
@@ -47,5 +46,4 @@ class Teacher extends Model
             $teacher->save(); // Save the model to update the password field
         });
     }
-
 }

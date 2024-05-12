@@ -2,7 +2,7 @@
 namespace App\Http\Controllers\Auth;
 
 use Illuminate\Support\Facades\Cookie;
-
+use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -25,12 +25,17 @@ class LoginController extends Controller
     */
     public function showLoginPage()
     {
+        foreach ($_COOKIE as $name => $value) {
+        Cookie::queue(Cookie::forget($name));
+        }
+
 
         return view('login_page');
     }
     //
     public function login(Request $request)
     {
+
         $request->validate([
             'email' => 'required|email',
             'password' => 'required',
@@ -56,10 +61,11 @@ class LoginController extends Controller
 
 
         if ($user && $credentials['password'] === $user->password) {
+
             Auth::login($user);
+
             $request->session()->put('user_type', $request->user_type);
-            //dd($credentials['email'], $credentials['password'], $user->password, $user->email);
-            // Pass user type along with user data
+
             return redirect()->intended(route('home_page'));
         } else {
             //dd('invalid credentials');
@@ -71,9 +77,12 @@ class LoginController extends Controller
      // Define the logout() method as before
      public function logout(Request $request)
      {
+            foreach ($_COOKIE as $name => $value) {
+                Cookie::queue(Cookie::forget($name));
+            }
 
             Auth::logout(); // Log the user out
-            return redirect()->route('login_page'); // Redirect to the login page after logout
+            return redirect()->route('login'); // Redirect to the login page after logout
 
 
      }

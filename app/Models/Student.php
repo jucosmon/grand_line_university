@@ -26,20 +26,18 @@ class Student extends Authenticatable
     {
         return $this->belongsTo(Program::class);
     }
-    public function enrollment()
+    public function enrollments(): BelongsToMany
     {
         return $this->belongsToMany(Enrollment::class);
     }
 
-    
-    
-
     public function sections(): BelongsToMany
+
     {
         return $this->belongsToMany(Section::class, 'enrollments', 'student_id', 'section_id')
-            ->withTimestamps(); // Assuming your enrollment table has timestamps
+            ->withTimestamps();
     }
-    
+
     protected static function boot()
     {
         parent::boot();

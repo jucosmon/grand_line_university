@@ -20,8 +20,8 @@ use App\Http\Middleware\CheckUserType;
 
 
 // Login and logout routes
-Route::get('/login_page', [LoginController::class, 'showLoginPage'])->name('login_page');
-Route::get('/login', [LoginController::class, 'login'])->name('login');
+Route::get('/login_page', [LoginController::class, 'showLoginPage'])->name('login');
+Route::get('/login', [LoginController::class, 'login'])->name('store_login');
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 // Homepage route with session check middleware
@@ -33,6 +33,11 @@ Route::middleware(['auth'])->group(function () {
 // Student routes
 Route::middleware(['auth', 'student'])->group(function () {
     Route::get('/student', [HomePageController::class, 'studentHome'])->name('student.home_page');
+    Route::get('/enrollment', [StudentsController::class, 'enrollmentPage'])->name('student.enrollment_page');
+    Route::get('/enroll', [StudentsController::class, 'enroll'])->name('student.enroll');
+    Route::delete('/{section_id}/delete', [StudentsController::class, 'deleteEnrollment'])->name('student.enrollment.delete');
+    Route::get('/academics', [StudentsController::class, 'academics'])->name('student.academics');
+
 });
 
 // Teacher routes

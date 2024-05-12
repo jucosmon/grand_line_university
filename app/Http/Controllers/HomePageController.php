@@ -9,6 +9,7 @@ class HomePageController extends Controller
 
     public function index(Request $request)
     {
+
         if (Auth::check()) {
             $userType = $request->session()->get('user_type');
 
@@ -29,7 +30,7 @@ class HomePageController extends Controller
             }
         } else {
             // User is not authenticated, redirect to login page
-            return redirect()->route('login_page');
+            return redirect()->route('login');
         }
     }
 }
