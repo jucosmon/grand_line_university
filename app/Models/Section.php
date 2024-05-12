@@ -22,6 +22,11 @@ class Section extends Model
     {
         return $this->belongsTo(SubjectOffering::class);
     }
+    public function subjectOffering()
+    {
+        return $this->belongsTo(SubjectOffering::class);
+    }
+
 
     public function teacher()
     {
@@ -29,7 +34,7 @@ class Section extends Model
     }
     public function enrollment()
     {
-        return $this->belongsToMany(Student::class, 'enrollment', 'section_id', 'student_id');
+        return $this->belongsToMany(Student::class, 'enrollments', 'section_id', 'student_id');
     }
 
 }

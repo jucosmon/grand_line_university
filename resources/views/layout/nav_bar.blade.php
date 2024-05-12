@@ -50,7 +50,7 @@
                     </li>
                 @elseif(session('user_type') === 'teacher')
                     <li class="nav-item">
-                        <a class="nav-link text-light" href="">Loads</a>
+                        <a class="nav-link text-light" href="{{ route('teacher.loads') }}">Loads</a>
                     </li>
                 @endif
 

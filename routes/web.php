@@ -13,11 +13,6 @@ use App\Http\Controllers\SubjectOfferingsController;
 use App\Http\Controllers\SubjectsController;
 use App\Http\Controllers\TeachersController;
 use App\Http\Controllers\TermsController;
-use App\Http\Middleware\CheckUserType;
-
-// just deleting cookies
-//Route::get('/deleteCookie', [LoginController::class, 'deleteCookies'])->name('deleteCookies');
-
 
 // Login and logout routes
 Route::get('/login_page', [LoginController::class, 'showLoginPage'])->name('login');
@@ -27,6 +22,7 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 // Homepage route with session check middleware
 Route::middleware(['auth'])->group(function () {
     Route::get('/', [HomePageController::class, 'index'])->name('home_page');
+
 });
 
 
@@ -42,9 +38,10 @@ Route::middleware(['auth', 'student'])->group(function () {
 
 // Teacher routes
 Route::middleware(['auth', 'teacher'])->group(function () {
-
         Route::get('/teacher', [HomePageController::class, 'teacherHome'])->name('teacher.home_page');
-});
+        Route::get('/teacher', [TeachersController::class, 'viewLoads'])->name('teacher.loads');
+        Route::get('/teacher/view-students/{section_id}', [TeachersController::class, 'viewStudents'])->name('teacher.section.students');
+    });
 
 // Admin routes
 Route::middleware(['auth', 'admin'])->group(function () {

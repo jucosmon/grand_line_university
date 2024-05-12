@@ -26,6 +26,11 @@ class Teacher extends Authenticatable {
         return $this->belongsTo(Department::class);
     }
 
+    public function sections()
+    {
+        return $this->hasMany(Section::class);
+    }
+
 
     protected static function boot()
     {

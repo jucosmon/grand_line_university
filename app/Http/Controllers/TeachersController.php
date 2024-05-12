@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 use App\Models\Teacher;
 use Illuminate\Http\Request;
 use App\Models\Department;
+use App\Models\Enrollment;
+use App\Models\Section;
+use App\Models\Student;
+use Illuminate\Support\Facades\Auth;
 
 class TeachersController extends Controller
 {
@@ -96,4 +100,61 @@ class TeachersController extends Controller
 
         return redirect()->route('teacher.manage')->with('success', 'Teacher deleted successfully.');
     }
+
+
+    public function viewLoads()
+    {
+        // Get the current authenticated teacher
+        $teacher = Teacher::find(Auth::id());
+
+        // Fetch current and past sections where the teacher is assigned
+        $currentSections = $teacher->sections()->whereHas('subjectOffering.term', function ($query) {
+            $query->where('status', 'active'); // Filter for active terms
+        })->get();
+
+        $pastSections = $teacher->sections()->whereHas('subjectOffering.term', function ($query) {
+            $query->where('status', 'done'); // Filter for past terms
+        })->get();
+
+        // Retrieve the student count for each section
+        foreach ($currentSections as $section) {
+            $enrollment = Enrollment::where('section_id', $section->id)->get();
+            $section->student_count = $enrollment->count();
+        }
+
+        foreach ($pastSections as $section) {
+            $enrollment = Enrollment::where('section_id', $section->id)->get();
+            $section->student_count = $enrollment->count();
+        }
+
+        return view('pages.teacher.loads', compact('currentSections', 'pastSections'));
+    }
+
+
+    public function viewStudents($section_id)
+    {
+        // Find the section
+        $section = Section::find($section_id);
+
+        if (!$section) {
+            return redirect()->back()->with('error', 'Section not found.');
+        }
+
+        // Get the students enrolled in the specified section
+        $enrollments = Enrollment::where('section_id', $section_id)->with('student')->get();
+
+        $students = $enrollments->pluck('student');
+
+        // Check if any students are found
+        if ($students->isNotEmpty()) {
+            return view('pages.teacher.view_students', compact('section', 'students'));
+        } else {
+            return redirect()->back()->with('error', 'No students enrolled in this section.');
+        }
+    }
+
+
+
+
+
 }

@@ -2,7 +2,6 @@
 namespace App\Http\Controllers\Auth;
 
 use Illuminate\Support\Facades\Cookie;
-use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -13,23 +12,8 @@ use App\Models\User;
 
 class LoginController extends Controller
 {
-    /*
-    public function deleteCookies()
-    {
-        foreach ($_COOKIE as $name => $value) {
-            Cookie::queue(Cookie::forget($name));
-        }
-
-        return redirect()->intended(route('home_page'));
-    }
-    */
     public function showLoginPage()
     {
-        foreach ($_COOKIE as $name => $value) {
-        Cookie::queue(Cookie::forget($name));
-        }
-
-
         return view('login_page');
     }
     //
@@ -67,8 +51,8 @@ class LoginController extends Controller
             $request->session()->put('user_type', $request->user_type);
 
             return redirect()->intended(route('home_page'));
+
         } else {
-            //dd('invalid credentials');
             return back()->withErrors(['email' => 'Invalid credentials']);
         }
 
