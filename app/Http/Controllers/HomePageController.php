@@ -10,16 +10,13 @@ class HomePageController extends Controller
     public function index(Request $request)
     {
         if (Auth::check()) {
-            $user = Auth::user();
-
-            // Retrieve user type from the request or session
             $userType = $request->session()->get('user_type');
 
             // Redirect based on user type
             switch ($userType) {
                 case 'admin':
                     // Redirect admin to the admin home page
-                    return view('pages.home_page');
+                    return view('home_page');
                 case 'teacher':
                     // Redirect teacher to the teacher dashboard or another page
                     return view('pages.teacher.home');
@@ -32,7 +29,7 @@ class HomePageController extends Controller
             }
         } else {
             // User is not authenticated, redirect to login page
-            return redirect()->route('login');
+            return redirect()->route('login_page');
         }
     }
 }

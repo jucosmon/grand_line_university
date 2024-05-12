@@ -38,8 +38,18 @@
                         <a class="dropdown-item" href="{{ route('enrollment.index') }}">Enrollment</a>
                     </div>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link text-light" href="#">Profile</a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-light" href="#" id="menuDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Account
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="menuDropdown">
+                        <a class="dropdown-item" href="#">Profile</a>
+                        <form action="{{ route('logout') }}" method="POST">
+                            @csrf <!-- Include CSRF token -->
+                            <button type="submit" class="dropdown-item">Logout</button>
+                        </form>
+                    </div>
                 </li>
             </ul>
         </div>

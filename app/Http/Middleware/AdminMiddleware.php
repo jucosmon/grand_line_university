@@ -15,7 +15,7 @@ class AdminMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $userType = session('credentials')['user_type'];
+        $userType = session('user_type'); // Fetch 'user_type' directly from the session
 
         if (auth()->check() && $userType == 'admin') {
             return $next($request);

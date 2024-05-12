@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use App\Http\Middleware\CheckUserType;
+use Closure;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -27,6 +28,8 @@ class AppServiceProvider extends ServiceProvider
     }
     protected function registerMiddleware(): void
     {
-        $this->app['router']->aliasMiddleware('check.user.type', CheckUserType::class);
+        $this->app['router']->middleware('check.user.type', CheckUserType::class);
     }
+
+
 }

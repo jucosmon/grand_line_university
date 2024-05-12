@@ -6,15 +6,14 @@ use Illuminate\Support\Facades\Cookie;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 use App\Models\Teacher;
 use App\Models\Student;
 use App\Models\User;
-use Illuminate\Support\Facades\Log;
 
 
 class LoginController extends Controller
 {
+    /*
     public function deleteCookies()
     {
         foreach ($_COOKIE as $name => $value) {
@@ -23,13 +22,21 @@ class LoginController extends Controller
 
         return redirect()->intended(route('home_page'));
     }
+    */
     public function showLoginPage()
     {
+
         return view('login_page');
     }
     //
     public function login(Request $request)
     {
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+            'user_type' => 'required',
+        ]);
+
         $credentials = $request->only('email', 'password', 'user_type');
 
         // Determine which table to search based on user_type
@@ -44,15 +51,18 @@ class LoginController extends Controller
                 $user = Student::where('email', $credentials['email'])->first();
                 break;
             default:
-                return back()->withErrors(['email' => 'Invalid user type']);
+                return back()->withErrors(['user_type' => 'Invalid user type']);
         }
+
 
         if ($user && $credentials['password'] === $user->password) {
             Auth::login($user);
-
+            $request->session()->put('user_type', $request->user_type);
+            //dd($credentials['email'], $credentials['password'], $user->password, $user->email);
             // Pass user type along with user data
-            return redirect()->intended(route('home_page'))->with('user_type', $credentials['user_type']);
+            return redirect()->intended(route('home_page'));
         } else {
+            //dd('invalid credentials');
             return back()->withErrors(['email' => 'Invalid credentials']);
         }
 
