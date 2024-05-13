@@ -153,6 +153,45 @@ class TeachersController extends Controller
         }
     }
 
+    public function showProfile()
+    {
+        $teacher = Teacher::find(Auth::id());// Assuming the authenticated user is the teacher
+        return view('pages.teacher.profile', compact('teacher'));
+    }
+
+    public function editProfileForm()
+    {
+        $teacher = Teacher::find(Auth::id()); // Assuming the authenticated user is the teacher
+        return view('pages.teacher.edit_profile', compact('teacher'));
+    }
+
+    public function editProfile(Request $request)
+    {
+        $teacher = Teacher::find(Auth::id()); // Assuming the authenticated user is the teacher
+
+        $validatedData = $request->validate([
+            'first_name' => 'required|string',
+            'last_name' => 'required|string',
+            'middle_initial' => 'nullable|string',
+            'birthday' => 'required|date',
+            'sex' => 'required|string|in:F,M,O',
+            'password' => 'required|string', // Add password validation
+        ]);
+
+        // Update profile fields
+        $teacher->update($validatedData);
+
+
+        // Update the email based on the updated first name and last name
+        $lastNameLowercase = strtolower($teacher->last_name);
+        $firstNameLowercase = strtolower($teacher->first_name);
+        $firstName = str_replace(' ', '_', $firstNameLowercase);
+        $email = $lastNameLowercase . '.' . $firstName . '@glu.edu.ph';
+        $teacher->email = $email;
+        $teacher->save();
+
+        return redirect()->route('teacher.profile')->with('success', 'Profile updated successfully.');
+    }
 
 
 

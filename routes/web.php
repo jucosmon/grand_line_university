@@ -1,9 +1,12 @@
 <?php
+
+use App\Http\Controllers\AdminController;
 use App\Http\Middleware\AdminMiddleware;
 use App\Http\Middleware\TeacherMiddleware;
 use App\Http\Middleware\StudentMiddleware;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Controller;
 use App\Http\Controllers\DepartmentsController;
 use App\Http\Controllers\EnrollmentsController;
 use App\Http\Controllers\HomePageController;
@@ -33,14 +36,21 @@ Route::middleware(['auth', 'student'])->group(function () {
     Route::get('/enroll', [StudentsController::class, 'enroll'])->name('student.enroll');
     Route::delete('/{section_id}/delete', [StudentsController::class, 'deleteEnrollment'])->name('student.enrollment.delete');
     Route::get('/academics', [StudentsController::class, 'academics'])->name('student.academics');
+    Route::get('/student/profile', [StudentsController::class, 'showProfile'])->name('student.profile');
+    Route::get('/student/edit_form/{id}', [StudentsController::class, 'editProfileForm'])->name('student.edit_profile_form');
+    Route::put('/student/edit/{id}', [StudentsController::class, 'editProfile'])->name('student.edit_profile');
+
 
 });
 
 // Teacher routes
 Route::middleware(['auth', 'teacher'])->group(function () {
         Route::get('/teacher', [HomePageController::class, 'teacherHome'])->name('teacher.home_page');
-        Route::get('/teacher', [TeachersController::class, 'viewLoads'])->name('teacher.loads');
+        Route::get('/teacher/loads', [TeachersController::class, 'viewLoads'])->name('teacher.loads');
         Route::get('/teacher/view-students/{section_id}', [TeachersController::class, 'viewStudents'])->name('teacher.section.students');
+        Route::get('/teacher/profile', [TeachersController::class, 'showProfile'])->name('teacher.profile');
+        Route::get('/teacher/edit_form/{id}', [TeachersController::class, 'editProfileForm'])->name('teacher.edit_profile_form');
+        Route::put('/teacher/edit/{id}', [TeachersController::class, 'editProfile'])->name('teacher.edit_profile');
     });
 
 // Admin routes
@@ -139,4 +149,9 @@ Route::middleware(['auth', 'admin'])->group(function () {
         Route::put('/{id}/update', [TermsController::class, 'update'])->name('term.update');
         Route::delete('/{id}/delete', [TermsController::class, 'destroy'])->name('term.delete');
     });
+
+     Route::get('/chair/profile', [AdminController::class, 'showProfile'])->name('user.profile');
+        Route::get('/chair/edit_form/{id}', [AdminController::class, 'editProfileForm'])->name('user.edit_profile_form');
+        Route::put('/chair/edit/{id}', [AdminController::class, 'editProfile'])->name('user.edit_profile');
+
 });

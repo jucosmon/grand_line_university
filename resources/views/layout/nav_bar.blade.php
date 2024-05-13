@@ -60,7 +60,14 @@
                         Account
                     </a>
                     <div class="dropdown-menu" aria-labelledby="menuDropdown">
-                        <a class="dropdown-item" href="#">Profile</a>
+                        @if (session('user_type') === 'admin')
+                            <a class="dropdown-item" href="{{ route('user.profile') }}">Profile</a>
+                        @elseif(session('user_type') === 'student')
+                            <a class="dropdown-item" href="{{ route('student.profile') }}">Profile</a>
+                        @elseif(session('user_type') === 'teacher')
+                            <a class="dropdown-item" href="{{ route('teacher.profile') }}">Profile</a>
+                        @endif
+
                         <form action="{{ route('logout') }}" method="POST">
                             @csrf <!-- Include CSRF token -->
                             <button type="submit" class="dropdown-item">Logout</button>

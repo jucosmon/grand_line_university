@@ -200,5 +200,55 @@ class StudentsController extends Controller
         return redirect()->route('student.manage')->with('success', 'Student deleted successfully.');
     }
 
+    //profile
+    public function showProfile()
+    {
+        $student = Student::find(Auth::id());// Assuming the authenticated user is the student
+        return view('pages.student.profile', compact('student'));
+    }
+
+    public function editProfileForm()
+    {
+        $student = Student::find(Auth::id()); // Assuming the authenticated user is the student
+        $programs = Program::all(); // Assuming you have a Program model
+        return view('pages.student.edit_profile', compact('student', 'programs'));
+    }
+
+    public function editProfile(Request $request)
+    {
+        $student = Student::find(Auth::id()); // Assuming the authenticated user is the student
+
+        $validatedData = $request->validate([
+            'first_name' => 'required|string',
+            'last_name' => 'required|string',
+            'middle_initial' => 'nullable|string',
+            'birthday' => 'required|date',
+            'sex' => 'required|string|in:F,M,O',
+            'password' => 'required|string', // Add password validation
+        ]);
+
+        // Update profile fields
+        $student->update([
+            'first_name' => $validatedData['first_name'],
+            'last_name' => $validatedData['last_name'],
+            'middle_initial' => $validatedData['middle_initial'],
+            'birthday' => $validatedData['birthday'],
+            'sex' => $validatedData['sex'],
+        ]);
+
+        // Update the email based on the updated first name and last name
+        $lastNameLowercase = strtolower($student->last_name);
+        $firstNameLowercase = strtolower($student->first_name);
+        $firstName = str_replace(' ', '_', $firstNameLowercase);
+        $email = $lastNameLowercase . '.' . $firstName . '@glu.edu.ph';
+        $student->email = $email;
+        $student->save();
+
+        // Update password without hashing
+        $student->password = $validatedData['password'];
+        $student->save();
+
+        return redirect()->route('student.profile')->with('success', 'Profile updated successfully.');
+    }
 
 }
