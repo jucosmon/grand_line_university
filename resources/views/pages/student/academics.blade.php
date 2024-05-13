@@ -13,7 +13,7 @@
 
                     <div class="card-body">
                         @if ($enrolledSections->isNotEmpty())
-                            <table class="table" style="color: white;">
+                            <table class="table" style="color: white;margin-bottom: 27%"">
                                 <thead>
                                     <tr>
                                         <th>Subject</th>

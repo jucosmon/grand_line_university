@@ -46,10 +46,10 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @foreach ($enrolledSections as $section)
+                                            @if ($section->subject_offering->term->status == 'active')
+                                                <tr>
 
-                                        <tr>
-                                            @foreach ($enrolledSections as $section)
-                                                @if ($section->subject_offering->term->status == 'active')
                                                     <td>{{ $section->subject_offering->subject->code }}</td>
                                                     <td>{{ $section->section_number }}</td>
                                                     <td>{{ $section->subject_offering->term->academic_year }}
@@ -81,10 +81,10 @@
                                                 @else
                                                     <p class="text-center text-white">You haven't enrolled any subject for this
                                                         sem</p>
-                                                @endif
-                                            @endforeach
-                                        </tr>
 
+                                                </tr>
+                                            @endif
+                                        @endforeach
                                     </tbody>
                                 </table>
                             @else
